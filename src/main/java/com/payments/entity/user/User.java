@@ -1,8 +1,8 @@
-package com.payments.system.entity.user;
+package com.payments.entity.user;
 
-import com.payments.system.entity.Identifiable;
-import com.payments.system.entity.account.Account;
-import com.payments.system.entity.operation.Operation;
+import com.payments.entity.Identifiable;
+import com.payments.entity.account.Account;
+import com.payments.entity.operation.Operation;
 import java.util.ArrayList;
 import java.util.List;
 

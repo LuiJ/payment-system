@@ -1,6 +1,6 @@
-package com.payments.system.entity.admin;
+package com.payments.entity.admin;
 
-import com.payments.system.entity.Identifiable;
+import com.payments.entity.Identifiable;
 
 
 public class Admin  implements Identifiable {

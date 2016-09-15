@@ -1,6 +1,7 @@
-package com.payments.system.entity.card;
+package com.payments.entity.card;
 
-import com.payments.system.entity.Identifiable;
+import com.payments.entity.Identifiable;
+import com.payments.entity.Status;
 
 
 public class Card implements Identifiable {

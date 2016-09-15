@@ -1,4 +1,4 @@
-package com.payments.system.entity;
+package com.payments.entity;
 
 
 public interface Identifiable {

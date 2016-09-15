@@ -1,6 +1,6 @@
-package com.payments.system.entity.operation;
+package com.payments.entity.operation;
 
-import com.payments.system.entity.Identifiable;
+import com.payments.entity.Identifiable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,7 +9,7 @@ public class Operation implements Identifiable {
 
     private int id;
     private Date date;
-    private TypeEnum type;
+    private OperationType type;
     private BigDecimal amount;
     private String description;
 
@@ -31,11 +31,11 @@ public class Operation implements Identifiable {
         this.date = date;
     }
 
-    public TypeEnum getType() {
+    public OperationType getType() {
         return type;
     }
 
-    public void setType(TypeEnum type) {
+    public void setType(OperationType type) {
         this.type = type;
     }
 
