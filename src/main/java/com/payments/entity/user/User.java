@@ -8,6 +8,14 @@ import java.util.List;
 
 
 public class User implements Identifiable {
+    
+    public static final String TABLE_NAME = "user";
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_LOGIN = "login";
+    public static final String FIELD_PASSWORD = "password";
+    public static final String FIELD_SALT = "salt";
+    public static final String FIELD_FIRST_NAME = "first_name";
+    public static final String FIELD_LAST_NAME = "last_name";
 
     private int id;
     private String login;
@@ -87,6 +95,18 @@ public class User implements Identifiable {
 
     public void setOperations(List<Operation> operations) {
         this.operations = operations;
+    }
+    
+    @Override
+    public String toString(){
+        String result = this.getClass().getSimpleName() + ":"
+                      + "\n--------------------\n" 
+                      + "Login: " + login + "\n" 
+                      + "Password: " + password + "\n" 
+                      + "Salt: " + salt + "\n"
+                      + "First name: " + firstName + "\n"
+                      + "Last name: " + lastName + "\n";
+        return result;
     }
     
 }

@@ -4,6 +4,12 @@ import com.payments.entity.Identifiable;
 
 
 public class Admin  implements Identifiable {
+    
+    public static final String TABLE_NAME = "admin";
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_LOGIN = "login";
+    public static final String FIELD_PASSWORD = "password";
+    public static final String FIELD_SALT = "salt";
 
     private int id;
     private String login;
@@ -50,6 +56,16 @@ public class Admin  implements Identifiable {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+    
+    @Override
+    public String toString(){
+        String result = this.getClass().getSimpleName() + ":"
+                      + "\n--------------------\n" 
+                      + "Login: " + login + "\n" 
+                      + "Password: " + password + "\n" 
+                      + "Salt: " + salt + "\n";
+        return result;
     }
     
 }
