@@ -13,35 +13,35 @@ public enum DAOFactory {
 
     public AccountDAO getAccountDAO(){
         if (accountDAO == null){
-            accountDAO = new AccountDAOImpl();
+            accountDAO = new AccountDAO();
         }
         return accountDAO;
     }   
 
     public AdminDAO getAdminDAO() {
         if (adminDAO == null){
-            adminDAO = new AdminDAOImpl();
+            adminDAO = new AdminDAO();
         }
         return adminDAO;
     }
 
     public CardDAO getCardDAO() {
         if (cardDAO == null){
-            cardDAO = new CardDAOImpl();
+            cardDAO = new CardDAO();
         }
         return cardDAO;
     }
 
     public OperationDAO getOperationDAO() {
         if (operationDAO == null){
-            operationDAO = new OperationDAOImpl();
+            operationDAO = new OperationDAO();
         }
         return operationDAO;
     }
 
     public UserDAO getUserDAO() {
         if (userDAO == null){
-            userDAO = new UserDAOImpl();
+            userDAO = new UserDAO();
         }
         return userDAO;
     }
