@@ -12,22 +12,18 @@ public class CardDAO extends AbstractDAO<Card> {
     }
     
     public Card getByNumber(long cardNumber){
-        Card card = null;
         String number = String.valueOf(cardNumber);
         Properties conditions = new Properties();
         conditions.put("number", number);
-        List<Card> cards = helper.getAllByConditions(conditions);
-        if (!cards.isEmpty()){
-            card = cards.get(0);
-        }
+        Card card = getByConditionsSingleResult(conditions);
         return card;
     }
     
-    public List<Card> getByAccountId(int accountId){
+    public List<Card> getAllByAccountId(int accountId){
         String id = String.valueOf(accountId);
         Properties conditions = new Properties();
         conditions.put("account_id", id);
-        List<Card> cards = helper.getAllByConditions(conditions);
+        List<Card> cards = getAllByConditions(conditions);
         return cards;
     }
     

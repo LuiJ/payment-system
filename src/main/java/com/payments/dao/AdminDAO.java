@@ -1,7 +1,6 @@
 package com.payments.dao;
 
 import com.payments.entity.admin.Admin;
-import java.util.List;
 import java.util.Properties;
 
 
@@ -12,13 +11,9 @@ public class AdminDAO extends AbstractDAO<Admin> {
     }
 
     public Admin getByLogin(String login){
-        Admin admin = null;
         Properties conditions = new Properties();
         conditions.put("login", login);
-        List<Admin> admins = helper.getAllByConditions(conditions);
-        if (!admins.isEmpty()){
-            admin = admins.get(0);
-        }
+        Admin admin = getByConditionsSingleResult(conditions);
         return admin;
     }
     

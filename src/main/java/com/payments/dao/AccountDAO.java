@@ -11,11 +11,11 @@ public class AccountDAO extends AbstractDAO<Account> {
         super(Account.class); 
     }
     
-    public List<Account> getByUserId(int userId){
+    public List<Account> getAllByUserId(int userId){
         String id = String.valueOf(userId);
         Properties conditions = new Properties();
         conditions.put("user_id", id);
-        List<Account> accounts = helper.getAllByConditions(conditions);
+        List<Account> accounts = getAllByConditions(conditions);
         return accounts;
     }
     

@@ -43,51 +43,7 @@ public class DAOHelper <T extends Identifiable> {
         this.type = type;
     }    
     
-    public List<T> getAll(){
-        String tableName = getTableName();
-        String query = "SELECT * FROM " + tableName;
-        List<T> result = executeSelectQuery(query);
-        return result;
-    }
-    
-    public List<T> getAllByConditions(Properties conditions){
-        String tableName = getTableName();
-        String spliter = " AND ";
-        String queryConditions = propertiesToString(conditions, spliter);
-        String query = "SELECT * FROM " + tableName + " WHERE " + queryConditions;
-        List<T> result = executeSelectQuery(query);
-        return result;
-    } 
-    
-    public T getById(int id){
-        String tableName = getTableName();
-        String query = "SELECT * FROM " + tableName + " WHERE id=" + id;
-        T result = executeSelectQuery(query).get(0);
-        return result;
-    }
-    
-    public int save(T entity) {
-        int savedEntityId = 0; 
-        int id = entity.getId(); 
-        String saveQuery = null;       
-        if (id == 0){
-            saveQuery = createInsertQuery(entity);
-            T savedEntity = executeUpdateQuery(saveQuery).get(0);
-            savedEntityId = savedEntity.getId();
-        }
-        else {
-            saveQuery = createUpdateQuery(entity);
-            executeUpdateQuery(saveQuery);
-            savedEntityId = entity.getId();
-        }        
-        return savedEntityId;
-    }
-    
-    
-    // ------------------------------------------------------------------------
-    
-    
-    private List<T> executeSelectQuery(String query){         
+    public List<T> executeSelectQuery(String query){         
         List<T> entities = new ArrayList<>();
         try {            
             openDbConnection();
@@ -111,8 +67,8 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    private List<T> executeUpdateQuery(String query){         
-        List<T> entities = new ArrayList<>();
+    public List<Integer> executeUpdateQuery(String query){         
+        List<Integer> entitiesId = new ArrayList<>();
         try {            
             openDbConnection();
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -121,8 +77,7 @@ public class DAOHelper <T extends Identifiable> {
             
             while (resultSetUpdate.next()){
                 int id = resultSetUpdate.getInt(1);
-                T entity = getById(id);
-                entities.add(entity);
+                entitiesId.add(id);
             }                       
         } 
         catch (ClassNotFoundException | SQLException | IllegalArgumentException e) {
@@ -131,7 +86,7 @@ public class DAOHelper <T extends Identifiable> {
         finally {
             closeDbConnection(OperationEnum.UPDATE);
         }        
-        return entities;
+        return entitiesId;
     }
     
     
@@ -171,7 +126,7 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    private String getTableName(){
+    public String getTableName(){
         String tableName = null;
         try {
             tableName = (String) type.getField("TABLE_NAME").get(null);            
@@ -183,7 +138,7 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    private String createInsertQuery(T entity){
+    public String createInsertQuery(T entity){
         String tableName = getTableName();
         String paramsSpliter = ", ";
         String queryParams = entityParamsAndValuesToString(entity, paramsSpliter, ResultTypeEnum.PARAMS);
@@ -194,7 +149,7 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    private String createUpdateQuery(T entity){
+    public String createUpdateQuery(T entity){
         String tableName = getTableName();
         int entityId = entity.getId();
         String paramsSpliter = ", ";
@@ -256,7 +211,7 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    private String propertiesToString(Properties conditions, String splitWith){
+    public String propertiesToString(Properties conditions, String splitWith){
         List<String> queryParams = new ArrayList<>();
         Enumeration<Object> keys = conditions.keys();
         while (keys.hasMoreElements()){

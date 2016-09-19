@@ -11,11 +11,11 @@ public class OperationDAO extends AbstractDAO<Operation> {
         super(Operation.class);
     }
     
-    public List<Operation> getByUserId(int userId){
+    public List<Operation> getAllByUserId(int userId){
         String id = String.valueOf(userId);
         Properties conditions = new Properties();
         conditions.put("user_id", id);
-        List<Operation> operations = helper.getAllByConditions(conditions);
+        List<Operation> operations = getAllByConditions(conditions);
         return operations;
     }
     
