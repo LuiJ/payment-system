@@ -12,7 +12,7 @@ public class UserDAO extends AbstractDAO<User> {
     
     public User getByLogin(String login){
         Properties conditions = new Properties();
-        conditions.put("login", login);
+        conditions.put(User.FIELD_LOGIN, login);
         User user = getByConditionsSingleResult(conditions);        
         return user;
     }

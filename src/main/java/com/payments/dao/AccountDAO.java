@@ -14,7 +14,7 @@ public class AccountDAO extends AbstractDAO<Account> {
     public List<Account> getAllByUserId(int userId){
         String id = String.valueOf(userId);
         Properties conditions = new Properties();
-        conditions.put("user_id", id);
+        conditions.put(Account.FIELD_USER_ID, id);
         List<Account> accounts = getAllByConditions(conditions);
         return accounts;
     }

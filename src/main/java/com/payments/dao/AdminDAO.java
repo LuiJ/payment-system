@@ -12,7 +12,7 @@ public class AdminDAO extends AbstractDAO<Admin> {
 
     public Admin getByLogin(String login){
         Properties conditions = new Properties();
-        conditions.put("login", login);
+        conditions.put(Admin.FIELD_LOGIN, login);
         Admin admin = getByConditionsSingleResult(conditions);
         return admin;
     }

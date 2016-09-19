@@ -14,7 +14,7 @@ public class OperationDAO extends AbstractDAO<Operation> {
     public List<Operation> getAllByUserId(int userId){
         String id = String.valueOf(userId);
         Properties conditions = new Properties();
-        conditions.put("user_id", id);
+        conditions.put(Operation.FIELD_USER_ID, id);
         List<Operation> operations = getAllByConditions(conditions);
         return operations;
     }

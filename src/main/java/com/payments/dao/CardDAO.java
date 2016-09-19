@@ -14,7 +14,7 @@ public class CardDAO extends AbstractDAO<Card> {
     public Card getByNumber(long cardNumber){
         String number = String.valueOf(cardNumber);
         Properties conditions = new Properties();
-        conditions.put("number", number);
+        conditions.put(Card.FIELD_NUMBER, number);
         Card card = getByConditionsSingleResult(conditions);
         return card;
     }
@@ -22,7 +22,7 @@ public class CardDAO extends AbstractDAO<Card> {
     public List<Card> getAllByAccountId(int accountId){
         String id = String.valueOf(accountId);
         Properties conditions = new Properties();
-        conditions.put("account_id", id);
+        conditions.put(Card.FIELD_ACCOUNT_ID, id);
         List<Card> cards = getAllByConditions(conditions);
         return cards;
     }
