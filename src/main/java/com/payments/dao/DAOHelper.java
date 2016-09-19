@@ -1,17 +1,9 @@
 package com.payments.dao;
 
-import com.payments.db.JdbcConfig;
+import com.payments.db.DbHelper;
 import com.payments.entity.Identifiable;
-import com.payments.parser.resultset.EntityBuilder;
-import com.payments.parser.resultset.EntityBuilderFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,108 +14,70 @@ import org.apache.commons.lang3.StringUtils;
 
 
 
-public class DAOHelper <T extends Identifiable> {  
-    
-    private enum OperationEnum {
-        SELECT, UPDATE;
-    }
+public class DAOHelper <T extends Identifiable> {
     
     private enum ResultTypeEnum {
         PARAMS_AND_VALUES, PARAMS, VALUES;
-    }
+    }  
     
     private Class<T> type;
-    private Connection connection = null;
-    private Statement statement = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSetSelect = null;
-    private ResultSet resultSetUpdate = null;
+    private DbHelper<T> dbHelper;
     
     public DAOHelper(Class<T> type){
         this.type = type;
-    }    
+        dbHelper = new DbHelper<>(type);
+    } 
     
-    public List<T> executeSelectQuery(String query){         
-        List<T> entities = new ArrayList<>();
-        try {            
-            openDbConnection();
-            statement = connection.createStatement(); 
-            resultSetSelect = statement.executeQuery(query);
-                        
-            EntityBuilder builder = EntityBuilderFactory.create(type); 
-            
-            while (resultSetSelect.next()){
-                T entity = (T) builder.build(resultSetSelect);
-                entities.add(entity);
-            }                       
-        } 
-        catch (ClassNotFoundException | SQLException | IllegalArgumentException e) {
-            e.printStackTrace();
-        } 
-        finally {
-            closeDbConnection(OperationEnum.SELECT);
-        }        
-        return entities;
-    }
-    
-    
-    public List<Integer> executeUpdateQuery(String query){         
-        List<Integer> entitiesId = new ArrayList<>();
-        try {            
-            openDbConnection();
-            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.executeUpdate();
-            resultSetUpdate = preparedStatement.getGeneratedKeys();     
-            
-            while (resultSetUpdate.next()){
-                int id = resultSetUpdate.getInt(1);
-                entitiesId.add(id);
-            }                       
-        } 
-        catch (ClassNotFoundException | SQLException | IllegalArgumentException e) {
-            e.printStackTrace();
-        } 
-        finally {
-            closeDbConnection(OperationEnum.UPDATE);
-        }        
-        return entitiesId;
-    }
-    
-    
-    private void openDbConnection() throws ClassNotFoundException, SQLException,
-                                           IllegalArgumentException 
-    {           
-        String driver = JdbcConfig.INSTANCE.getDriver();
-        Class.forName(driver);            
-        String url = JdbcConfig.INSTANCE.getDbUrl();
-        String user = JdbcConfig.INSTANCE.getUser();
-        String password = JdbcConfig.INSTANCE.getPassword();
-        connection = DriverManager.getConnection(url, user, password);          
-    }
-    
-    
-    private void closeDbConnection(OperationEnum operation){
-        try {
-            if (resultSetSelect != null && operation == OperationEnum.SELECT) {
-                resultSetSelect.close();
-            }
-            if (resultSetUpdate != null && operation == OperationEnum.UPDATE) {
-                resultSetUpdate.close();
-            }
-            if (statement != null) {
-                statement.close();
-            }
-            if (preparedStatement != null){
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        } 
-        catch (SQLException e) {
-            e.printStackTrace();
+    public T getById(int id){
+        String tableName = getTableName();
+        String query = "SELECT * FROM " + tableName + " WHERE id=" + id;
+        T result = dbHelper.executeSelectQuery(query).get(0);
+        return result;
+    }     
+
+    public T getByConditionsSingleResult(Properties conditions){
+        T entity = null;
+        List<T> entities = getAllByConditions(conditions);
+        if (!entities.isEmpty()){
+            entity = entities.get(0);
         }
+        return entity;
+    }    
+
+    public List<T> getAllByConditions(Properties conditions){
+        String tableName = getTableName();
+        String spliter = " AND ";
+        String queryConditions = propertiesToString(conditions, spliter);
+        String query = "SELECT * FROM " + tableName + " WHERE " + queryConditions;
+        List<T> result = dbHelper.executeSelectQuery(query);
+        return result;
+    }    
+
+    public List<T> getAll(){
+        String tableName = getTableName();
+        String query = "SELECT * FROM " + tableName;
+        List<T> result = dbHelper.executeSelectQuery(query);
+        return result;
+    }    
+
+    public int save(T entity) {
+        int savedEntityId = 0; 
+        int id = entity.getId(); 
+        String saveQuery = null;       
+        if (id == 0){
+            saveQuery = createInsertQuery(entity);
+            savedEntityId = dbHelper.executeUpdateQuery(saveQuery).get(0);
+        }
+        else {
+            saveQuery = createUpdateQuery(entity);
+            dbHelper.executeUpdateQuery(saveQuery);
+            savedEntityId = entity.getId();
+        }        
+        return savedEntityId;
     }
+    
+    
+    // ------------------------------------------------------------------------
     
     
     public String getTableName(){
