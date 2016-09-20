@@ -11,10 +11,13 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 
 
 public class DAOHelper <T extends Identifiable> {
+    
+    private static final Logger logger = Logger.getLogger(DAOHelper.class);
     
     private enum ResultTypeEnum {
         PARAMS_AND_VALUES, PARAMS, VALUES;
@@ -86,7 +89,8 @@ public class DAOHelper <T extends Identifiable> {
             tableName = (String) type.getField("TABLE_NAME").get(null);            
         }
         catch (IllegalAccessException | NoSuchFieldException e){
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new IllegalStateException(e.getMessage());
         }
         return tableName;
     }

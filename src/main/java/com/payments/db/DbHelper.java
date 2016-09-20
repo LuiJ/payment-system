@@ -1,5 +1,6 @@
 package com.payments.db;
 
+import com.payments.dao.DAOHelper;
 import com.payments.entity.Identifiable;
 import com.payments.parser.resultset.EntityBuilder;
 import com.payments.parser.resultset.EntityBuilderFactory;
@@ -11,9 +12,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 
 public class DbHelper <T extends Identifiable> {
+    
+    private static final Logger logger = Logger.getLogger(DAOHelper.class);
     
     private Class<T> type;
     
@@ -47,7 +51,8 @@ public class DbHelper <T extends Identifiable> {
             }                       
         } 
         catch (ClassNotFoundException | SQLException | IllegalArgumentException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new IllegalStateException(e.getMessage());
         } 
         finally {
             closeDbConnection(OperationEnum.SELECT);
@@ -70,7 +75,8 @@ public class DbHelper <T extends Identifiable> {
             }                       
         } 
         catch (ClassNotFoundException | SQLException | IllegalArgumentException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new IllegalStateException(e.getMessage());
         } 
         finally {
             closeDbConnection(OperationEnum.UPDATE);
@@ -81,7 +87,7 @@ public class DbHelper <T extends Identifiable> {
     
     private void openDbConnection() throws ClassNotFoundException, SQLException,
                                            IllegalArgumentException 
-    {           
+    {    
         String driver = JdbcConfig.INSTANCE.getDriver();
         Class.forName(driver);            
         String url = JdbcConfig.INSTANCE.getDbUrl();
@@ -110,7 +116,8 @@ public class DbHelper <T extends Identifiable> {
             }
         } 
         catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new IllegalStateException(e.getMessage());
         }
     }
     
