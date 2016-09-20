@@ -1,6 +1,5 @@
 package com.payments.db;
 
-import com.payments.dao.DAOHelper;
 import com.payments.entity.Identifiable;
 import com.payments.parser.resultset.EntityBuilder;
 import com.payments.parser.resultset.EntityBuilderFactory;
@@ -17,7 +16,7 @@ import org.apache.log4j.Logger;
 
 public class DbHelper <T extends Identifiable> {
     
-    private static final Logger logger = Logger.getLogger(DAOHelper.class);
+    private static final Logger logger = Logger.getLogger(DbHelper.class);
     
     private Class<T> type;
     
