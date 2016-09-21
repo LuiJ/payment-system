@@ -17,17 +17,17 @@ public class CommandFactory {
         String[] urlParts = getUrlParts(request);
         
         if (urlParts.length == 0){
-            command = new PageNotFoundCommand();
+            return new PageNotFoundCommand();
         }   
         
         String httpMethod = request.getMethod().toUpperCase();
         
         switch (httpMethod){
             case HTTP_GET: 
-                processGetRequest(urlParts);
+                command = processGetRequest(urlParts);
                 break;
             case HTTP_POST:
-                processPostRequest(urlParts);
+                command = processPostRequest(urlParts);
                 break;
             default:
                 throw new IllegalArgumentException(httpMethod+" method is not supported.");
@@ -50,6 +50,7 @@ public class CommandFactory {
         switch (urlCommand){
             case ACCOUNTS:
                 command = new AccountsListCommand();
+                break;
             default: 
                 command = new PageNotFoundCommand();
         }
