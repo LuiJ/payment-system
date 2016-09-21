@@ -10,34 +10,60 @@ public class CommandFactory {
     
     private static final String ACCOUNTS = "accounts";
 
-    public static Command build(HttpServletRequest request)
+    
+    public static Command create(HttpServletRequest request)
     {
         Command command = null;
-        String[] urlParts = parseUrl(request);
+        String[] urlParts = getUrlParts(request);
         
-        if (urlParts.length > 0){            
-            String urlCommand = urlParts[1];            
-            String httpMethod = request.getMethod();
-            
-            if (urlCommand.equalsIgnoreCase(ACCOUNTS) && httpMethod.equalsIgnoreCase(HTTP_GET)){
-                command = new GetAccounts();
-            }        
-            else {
-                command = new PageNotFound();
-            }
-        }       
-        else {
-            command = new PageNotFound();
+        if (urlParts.length == 0){
+            command = new PageNotFoundCommand();
+        }   
+        
+        String httpMethod = request.getMethod().toUpperCase();
+        
+        switch (httpMethod){
+            case HTTP_GET: 
+                processGetRequest(urlParts);
+                break;
+            case HTTP_POST:
+                processPostRequest(urlParts);
+                break;
+            default:
+                throw new IllegalArgumentException(httpMethod+" method is not supported.");
         }        
         return command;
     }
     
     
-    private static String[] parseUrl(HttpServletRequest request){
-        String root = request.getContextPath();
-        String path = request.getRequestURI().split(root)[1];
-        String[] pathParts = path.split("/"); 
-        return pathParts;
+    private static String[] getUrlParts(HttpServletRequest request){
+        String urlRoot = request.getContextPath();
+        String urlWithoutRoot = request.getRequestURI().split(urlRoot)[1];
+        String[] urlParts = urlWithoutRoot.split("/"); 
+        return urlParts;
+    }    
+    
+    
+    private static Command processGetRequest(String[] urlParts){
+        Command command = null;
+        String urlCommand = urlParts[1];
+        switch (urlCommand){
+            case ACCOUNTS:
+                command = new AccountsListCommand();
+            default: 
+                command = new PageNotFoundCommand();
+        }
+        return command;
+    }
+    
+    
+    private static Command processPostRequest(String[] urlParts){
+        Command command = null;
+        String urlCommand = urlParts[1];
+        switch (urlCommand){
+            // In Development stage...
+        }
+        return command;
     }
     
 }

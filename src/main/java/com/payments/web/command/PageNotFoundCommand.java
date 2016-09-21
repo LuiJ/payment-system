@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class PageNotFound extends AbstractCommand {
+public class PageNotFoundCommand extends AbstractCommand {
     
     private static final String VIEW = "page_not_found";
     

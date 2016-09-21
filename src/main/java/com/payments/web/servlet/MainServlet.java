@@ -15,7 +15,7 @@ public class MainServlet extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException 
     {        
-        Command command = CommandFactory.build(request);
+        Command command = CommandFactory.create(request);
         command.execute(request, response);       
     }
     

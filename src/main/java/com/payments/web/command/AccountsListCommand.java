@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class GetAccounts extends AbstractCommand {
+public class AccountsListCommand extends AbstractCommand {
     
     private static final String VIEW = "accounts";
 

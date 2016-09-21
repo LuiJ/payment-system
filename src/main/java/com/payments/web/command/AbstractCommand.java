@@ -1,10 +1,12 @@
 package com.payments.web.command;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public abstract class AbstractCommand implements Command {
@@ -20,8 +22,10 @@ public abstract class AbstractCommand implements Command {
             throws ServletException, IOException
     {
         String view = VIEW_PREFIX + viewName + VIEW_SUFFIX;
-        ServletContext context = request.getSession().getServletContext();
-        context.getRequestDispatcher(view).forward(request, response);
+        HttpSession session = request.getSession();
+        ServletContext context = session.getServletContext();
+        RequestDispatcher dispatcher = context.getRequestDispatcher(view);
+        dispatcher.forward(request, response);
     }
     
 }
