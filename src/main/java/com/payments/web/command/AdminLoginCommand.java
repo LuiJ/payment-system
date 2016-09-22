@@ -23,19 +23,19 @@ public class AdminLoginCommand extends AbstractCommand {
         String login = request.getParameter(Admin.FIELD_LOGIN);
         Admin admin = adminDAO.getByLogin(login);
         
-        if (admin != null){            
-            String password = request.getParameter(Admin.FIELD_PASSWORD);
-            boolean correct = PasswordChecker.check(admin, password);
-            if (correct){
-                response.sendRedirect("accounts");
-            }
-            else {
-                String errorMessage = "Incorrect password";
-                sendError(request, response, errorMessage);
-            }
-        }
-        else {            
+        if (admin == null){
             String errorMessage = "Incorrect login";
+            sendError(request, response, errorMessage);
+            return;
+        }        
+                    
+        String password = request.getParameter(Admin.FIELD_PASSWORD);
+        boolean correct = PasswordChecker.check(admin, password);
+        if (correct){
+            response.sendRedirect("accounts");
+        }
+        else {
+            String errorMessage = "Incorrect password";
             sendError(request, response, errorMessage);
         }
     }   
