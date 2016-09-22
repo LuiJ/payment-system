@@ -1,10 +1,11 @@
 package com.payments.entity.card;
 
+import com.payments.entity.Checkable;
 import com.payments.entity.Identifiable;
 import com.payments.entity.Status;
 
 
-public class Card implements Identifiable {
+public class Card implements Identifiable, Checkable {
     
     public static final String TABLE_NAME = "card";
     public static final String FIELD_ID = "id";
@@ -38,6 +39,11 @@ public class Card implements Identifiable {
     public void setNumber(long number) {
         this.number = number;
     }
+    
+    @Override
+    public String getPassword() {
+        return pinCode;
+    }
 
     public String getPinCode() {
         return pinCode;
@@ -47,6 +53,7 @@ public class Card implements Identifiable {
         this.pinCode = pinCode;
     }
 
+    @Override
     public String getSalt() {
         return salt;
     }

@@ -70,25 +70,31 @@ ALTER TABLE `card`
 
 
 INSERT INTO `admin` (`id`, `login`, `password`, `salt`) VALUES
-(1, 'admin1', 'password1', 'salt1'),
-(2, 'admin2', 'password2', 'salt2');
+(1, 'admin1', '12edc7b4ebe670159074dfd7b22a47ee', '0adc3949ba59abbe56e0'),
+(2, 'admin2', '3e5cc78a82aa2392d67350736b1f4258', '70159074dfd7b22a47ee');
 
 
 INSERT INTO `user` (`id`, `login`, `password`, `salt`, `first_name`, `last_name`) VALUES
-(1, 'user1', 'password1', 'salt1', 'FN1', 'LN1'),
-(2, 'user2', 'password2', 'salt2', 'FN2', 'LN2');
+(1, 'user1', 'c73e6f014aba61cc9b2a95b0d908cf22', '2392d67350736b1f4258', 'Ivan', 'Sidorov'),
+(2, 'user2', 'a29fa3fcc50d61defd2344642c68727b', '61cc9b2a95b0d908cf22', 'Semen', 'Smirnov'),
+(3, 'user3', '2656b5202ab5f9e04a82f7e1b7ef5eca', '61defd2344642c68727b', 'Viktor', 'Ivanov');
 
 
 INSERT INTO `account` (`id`, `number`, `status`, `amount`, `user_id`) VALUES
-(1, 1111222233334444, 'ACTIVE', 1234.56, 1),
-(2, 2222333344445555, 'CLOSED', 2345.67, 2),
-(3, 3333444455556666, 'ACTIVE', 3456.78, 1);
+(1, 9999888877776666, 'ACTIVE', 1234.56, 1),
+(2, 8888777766665555, 'ACTIVE', 2345.67, 1),
+(3, 7777666655554444, 'ACTIVE', 3456.78, 2),
+(4, 6666555544443333, 'ACTIVE', 4567.89, 2),
+(5, 5555444433332222, 'ACTIVE', 5678.90, 3);
 
 
 INSERT INTO `card` (`id`, `number`, `pin_code`, `salt`, `status`, `account_id`) VALUES
-(1, 9999888877776666, 'PIN1', 'salt1', 'ACTIVE', 1),
-(2, 8888777766665555, 'PIN2', 'salt2', 'BLOCKED', 1),
-(3, 7777666655554444, 'PIN3', 'salt3', 'BLOCKED', 2);
+(1, 1111222233334444, '2e85f2853403ff47a63f3525034b848c', 'f9e04a82f7e1b7ef5eca', 'ACTIVE', 1),
+(2, 2222333344445555, 'dc1513be2d528fafbb5e4ffe6f255795', '7e4a80b9f6d0baad8991', 'ACTIVE', 2),
+(3, 3333444455556666, '4c93ae6f3b5785e75766718909c9c13d', '7750f3c4ab38895f3649', 'ACTIVE', 3),
+(4, 4444555566667777, '3957a57092de2a6ba493ad3e6a59c35f', '26ecb15588d4a445b12c', 'ACTIVE', 3),
+(5, 5555666677778888, 'a73a5617bd8afcfe22683a8c9988c6e4', 'bac3d0798fa05c3af10f', 'ACTIVE', 4),
+(6, 6666777788889999, '4c3a9503975ca8b04827524959553837', 'd720aa09c95ff7dd7ccf', 'ACTIVE', 5);
 
 
 INSERT INTO `operation` (`id`, `date`, `type`, `amount`, `description`, `user_id`) VALUES

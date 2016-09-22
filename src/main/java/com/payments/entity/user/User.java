@@ -1,5 +1,6 @@
 package com.payments.entity.user;
 
+import com.payments.entity.Checkable;
 import com.payments.entity.Identifiable;
 import com.payments.entity.account.Account;
 import com.payments.entity.operation.Operation;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class User implements Identifiable {
+public class User implements Identifiable, Checkable {
     
     public static final String TABLE_NAME = "user";
     public static final String FIELD_ID = "id";
@@ -49,6 +50,7 @@ public class User implements Identifiable {
         this.login = login;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -57,6 +59,7 @@ public class User implements Identifiable {
         this.password = password;
     }
 
+    @Override
     public String getSalt() {
         return salt;
     }

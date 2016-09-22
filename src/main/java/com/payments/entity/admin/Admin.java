@@ -1,9 +1,10 @@
 package com.payments.entity.admin;
 
+import com.payments.entity.Checkable;
 import com.payments.entity.Identifiable;
 
 
-public class Admin  implements Identifiable {
+public class Admin  implements Identifiable, Checkable {
     
     public static final String TABLE_NAME = "admin";
     public static final String FIELD_ID = "id";

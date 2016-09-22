@@ -9,6 +9,7 @@ public class CommandFactory {
     private static final String HTTP_POST = "POST";
     
     private static final String ACCOUNTS = "accounts";
+    private static final String ADMIN = "admin";
 
     
     public static Command create(HttpServletRequest request)
@@ -51,6 +52,9 @@ public class CommandFactory {
             case ACCOUNTS:
                 command = new AccountsListCommand();
                 break;
+            case ADMIN:
+                command = new AdminLoginPageCommand();
+                break;
             default: 
                 command = new PageNotFoundCommand();
         }
@@ -62,7 +66,11 @@ public class CommandFactory {
         Command command = null;
         String urlCommand = urlParts[1];
         switch (urlCommand){
-            // In Development stage...
+            case ADMIN:
+                command = new AdminLoginCommand();
+                break;
+            default: 
+                command = new PageNotFoundCommand();
         }
         return command;
     }

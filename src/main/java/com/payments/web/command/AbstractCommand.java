@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 public abstract class AbstractCommand implements Command {
 
+    public static final String ERROR_MESSAGE = "errorMessage";
+    
     private final String VIEW_PREFIX = "/WEB-INF/views/";
     private final String VIEW_SUFFIX = ".jsp";
     
