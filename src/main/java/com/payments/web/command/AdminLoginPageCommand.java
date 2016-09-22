@@ -16,7 +16,7 @@ public class AdminLoginPageCommand extends AbstractCommand {
     public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
     {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(true);
         
         Object errorMessageObj = session.getAttribute(ERROR_MESSAGE);
         if (errorMessageObj != null){
