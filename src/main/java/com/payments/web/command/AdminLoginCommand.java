@@ -30,7 +30,8 @@ public class AdminLoginCommand extends AbstractCommand {
         }        
                     
         String password = request.getParameter(Admin.FIELD_PASSWORD);
-        boolean correct = PasswordChecker.check(admin, password);
+        PasswordChecker passwordChecker = new PasswordChecker();
+        boolean correct = passwordChecker.check(admin, password);
         if (correct){
             response.sendRedirect("accounts");
         }
