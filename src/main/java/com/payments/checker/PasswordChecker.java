@@ -2,18 +2,22 @@ package com.payments.checker;
 
 import com.payments.entity.Checkable;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import org.apache.log4j.Logger;
 
 
 public class PasswordChecker {
     
-    private MessageDigest messageDigest;
+    private static final Logger logger = Logger.getLogger(PasswordChecker.class);
+    private final MessageDigest messageDigest;
     
     public PasswordChecker(){
         try {
             messageDigest = MessageDigest.getInstance("MD5");
         }        
-        catch (Exception e){
-            throw new IllegalArgumentException(e);
+        catch (NoSuchAlgorithmException e){
+            logger.error(e.getMessage(), e);
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

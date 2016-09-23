@@ -1,33 +1,30 @@
 package com.payments.web.command;
 
+import com.payments.exception.PaymentsException;
+import com.payments.web.view.Renderer;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 public abstract class AbstractCommand implements Command {
-
-    public static final String ERROR_MESSAGE = "errorMessage";
     
-    private final String VIEW_PREFIX = "/WEB-INF/views/";
-    private final String VIEW_SUFFIX = ".jsp";
+    private final Renderer renderer;
+    
+    public AbstractCommand(){
+        renderer = new Renderer();
+    }
     
     @Override
     public abstract void execute(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException;
+            throws ServletException, IOException, PaymentsException;
+    
     
     protected void render(HttpServletRequest request, HttpServletResponse response, String viewName) 
             throws ServletException, IOException
     {
-        String view = VIEW_PREFIX + viewName + VIEW_SUFFIX;
-        HttpSession session = request.getSession();
-        ServletContext context = session.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher(view);
-        dispatcher.forward(request, response);
+        renderer.render(request, response, viewName);
     }
     
 }
