@@ -11,17 +11,13 @@ import javax.servlet.http.HttpSession;
 
 public class Renderer {
     
-    private final String VIEW_PREFIX = "/WEB-INF/views/";
-    private final String VIEW_SUFFIX = ".jsp";
-    
-    public void render(HttpServletRequest request, HttpServletResponse response, String viewName) 
+    public void render(HttpServletRequest request, HttpServletResponse response, View view) 
             throws ServletException, IOException
     {
-        String view = VIEW_PREFIX + viewName + VIEW_SUFFIX;
+        String pageFullName = view.getPageFullName();
         HttpSession session = request.getSession();
         ServletContext context = session.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher(view);
+        RequestDispatcher dispatcher = context.getRequestDispatcher(pageFullName);
         dispatcher.forward(request, response);
-    }
-    
+    }    
 }

@@ -2,6 +2,7 @@ package com.payments.web.command;
 
 import com.payments.exception.PaymentsException;
 import com.payments.web.view.Renderer;
+import com.payments.web.view.View;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +22,10 @@ public abstract class AbstractCommand implements Command {
             throws ServletException, IOException, PaymentsException;
     
     
-    protected void render(HttpServletRequest request, HttpServletResponse response, String viewName) 
+    protected void render(HttpServletRequest request, HttpServletResponse response, View view) 
             throws ServletException, IOException
     {
-        renderer.render(request, response, viewName);
+        renderer.render(request, response, view);
     }
     
 }

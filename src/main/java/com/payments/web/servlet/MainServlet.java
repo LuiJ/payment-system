@@ -7,6 +7,7 @@ import com.payments.web.command.Command;
 import com.payments.web.command.CommandFactory;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.Renderer;
+import com.payments.web.view.View;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,12 +32,12 @@ public class MainServlet extends HttpServlet {
             command.execute(request, response); 
         }
         catch (AccountNotFoundException e){
-            String view = e.getPageToRender();
+            View view = e.getViewToRender();
             request.setAttribute(Attribute.ERROR_MESSAGE, "Incorrect login");
             renderer.render(request, response, view);            
         }   
         catch (AuthentificationException e){            
-            String view = e.getPageToRender();
+            View view = e.getViewToRender();
             request.setAttribute(Attribute.ERROR_MESSAGE, "Incorrect password");
             renderer.render(request, response, view);   
         }

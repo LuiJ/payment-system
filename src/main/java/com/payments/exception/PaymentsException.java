@@ -1,16 +1,17 @@
 package com.payments.exception;
 
+import com.payments.web.view.View;
+
 
 public class PaymentsException extends Exception {
     
-    private String pageToRender;
-
-    public String getPageToRender() {
-        return pageToRender;
-    }
-
-    public void setPageToRender(String pageToRender) {
-        this.pageToRender = pageToRender;
-    }
+    private final View viewToRender;
     
+    public PaymentsException(View view){
+        viewToRender = view;
+    }
+
+    public View getViewToRender() {
+        return viewToRender;
+    }    
 }

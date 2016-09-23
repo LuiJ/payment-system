@@ -28,9 +28,7 @@ public class AdminLoginCommand extends AbstractCommand {
         Admin admin = adminDAO.getByLogin(login);
         
         if (admin == null){
-            AccountNotFoundException ex = new AccountNotFoundException();
-            ex.setPageToRender(View.ADMIN_LOGIN);
-            throw ex;
+            throw new AccountNotFoundException(View.ADMIN_LOGIN);
         }        
                     
         String password = request.getParameter(Attribute.PASSWORD);
@@ -41,9 +39,7 @@ public class AdminLoginCommand extends AbstractCommand {
             command.execute(request, response);
         }
         else {
-            AuthentificationException ex = new AuthentificationException();
-            ex.setPageToRender(View.ADMIN_LOGIN);
-            throw ex;
+            throw new AuthentificationException(View.ADMIN_LOGIN);
         }
     }   
 }
