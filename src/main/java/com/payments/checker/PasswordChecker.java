@@ -30,9 +30,9 @@ public class PasswordChecker {
         return result;
     }    
     
-    private String getHash(String saltedPassword){
-        byte[] saltedPasswordBytes = saltedPassword.getBytes();
-        messageDigest.update(saltedPasswordBytes);
+    private String getHash(String value){
+        byte[] valueBytes = value.getBytes();
+        messageDigest.update(valueBytes);
         byte[] bytes = messageDigest.digest();
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < bytes.length; i++) {

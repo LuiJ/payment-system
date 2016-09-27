@@ -32,13 +32,13 @@ public class MainServlet extends HttpServlet {
             command.execute(request, response); 
         }
         catch (AccountNotFoundException e){
-            View view = e.getViewToRender();
             request.setAttribute(Attribute.ERROR_MESSAGE, "Incorrect login");
+            View view = e.getViewToRender();
             renderer.render(request, response, view);            
         }   
-        catch (AuthentificationException e){            
+        catch (AuthentificationException e){  
+            request.setAttribute(Attribute.ERROR_MESSAGE, "Incorrect password");          
             View view = e.getViewToRender();
-            request.setAttribute(Attribute.ERROR_MESSAGE, "Incorrect password");
             renderer.render(request, response, view);   
         }
         catch (PaymentsException e){
