@@ -16,10 +16,12 @@ public class CommandFactory {
     private static final String HTTP_GET = "GET";
     private static final String HTTP_POST = "POST";
            
-    private static final String ADMIN = "admin";
+    private static final String ADMIN = "admin";    
+    private static final String ADMIN_HOME = "/admin";
     private static final String ADMIN_ACCOUNTS = "/admin/accounts";
        
-    private static final String USER = "user"; 
+    private static final String USER = "user";     
+    private static final String USER_HOME = "/user";
     private static final String USER_ACCOUNTS = "/user/accounts";
         
     private static final String HOME = "/";
@@ -65,8 +67,14 @@ public class CommandFactory {
             case LOGIN_FAILED:
                 command = getLoginFailedCommand(request);
                 break;
+            case ADMIN_HOME:
+                command = new AdminAccountsListCommand();
+                break;
             case ADMIN_ACCOUNTS:
                 command = new AdminAccountsListCommand();
+                break;
+            case USER_HOME:
+                command = new UserAccountsListCommand();
                 break;
             case USER_ACCOUNTS:
                 command = new UserAccountsListCommand();
@@ -133,6 +141,7 @@ public class CommandFactory {
         String urlRoot = request.getContextPath();
         String uri = request.getRequestURI();
         String commandString = uri.split(urlRoot)[1];
+        commandString = removeLastSlash(commandString);
         return commandString;
     }
     
@@ -145,6 +154,15 @@ public class CommandFactory {
         String savedRequestCommand = requestedUrl.split(urlRoot)[1];
         String userType = savedRequestCommand.split("/")[1];
         return userType;
+    }
+    
+    
+    private static String removeLastSlash(String value) {
+        String result = value;
+        if (value != null && value.length() > 1 && value.charAt(value.length()-1) == '/') {
+            result = value.substring(0, value.length()-1);
+        }
+        return result;
     }
     
 }
