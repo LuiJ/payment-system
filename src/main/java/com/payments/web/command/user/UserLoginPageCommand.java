@@ -1,6 +1,6 @@
-package com.payments.web.command;
+package com.payments.web.command.user;
 
-import com.payments.exception.PaymentsException;
+import com.payments.web.command.AbstractCommand;
 import com.payments.web.view.View;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AdminLoginPageCommand extends AbstractCommand {
+public class UserLoginPageCommand extends AbstractCommand {
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException, PaymentsException
+            throws ServletException, IOException
     {    
-        render(request, response, View.ADMIN_LOGIN);
+        render(request, response, View.USER_LOGIN);
     }    
 }

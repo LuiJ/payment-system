@@ -5,12 +5,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Payments - Admin</title>
+        <title>Payments - User</title>
     </head> 
 
     <body>
         
-        <h1>Admin Log In:</h1>
+        <h1>User Log In:</h1>
         
         <c:if test="${not empty errorMessage}">
             <h3 style="color: #b6531d;">${errorMessage}</h3>

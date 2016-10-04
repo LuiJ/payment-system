@@ -10,6 +10,7 @@ public enum DAOFactory {
     private CardDAO cardDAO;
     private OperationDAO operationDAO;
     private UserDAO userDAO;
+    private RoleDAO roleDAO;
 
     public AccountDAO getAccountDAO(){
         if (accountDAO == null){
@@ -44,6 +45,13 @@ public enum DAOFactory {
             userDAO = new UserDAO();
         }
         return userDAO;
+    }
+
+    public RoleDAO getRoleDAO() {
+        if (roleDAO == null){
+            roleDAO = new RoleDAO();
+        }
+        return roleDAO;
     }
             
 }

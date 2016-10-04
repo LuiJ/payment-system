@@ -4,6 +4,7 @@ import com.payments.entity.account.Account;
 import com.payments.entity.admin.Admin;
 import com.payments.entity.card.Card;
 import com.payments.entity.operation.Operation;
+import com.payments.entity.role.Role;
 import com.payments.entity.user.User;
 
 
@@ -24,6 +25,9 @@ public class EntityBuilderFactory {
             }
             else if (type == Operation.class){
                 builder = new OperationBuilder();
+            }
+            else if (type == Role.class){
+                builder = new RoleBuilder();
             }
             else if (type == User.class){
                 builder = new UserBuilder();

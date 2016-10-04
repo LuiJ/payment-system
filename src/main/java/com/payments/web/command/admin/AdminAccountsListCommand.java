@@ -1,11 +1,11 @@
-package com.payments.web.command;
+package com.payments.web.command.admin;
 
 import com.payments.dao.AccountDAO;
 import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.entity.account.Account;
 import com.payments.entity.card.Card;
-import com.payments.exception.PaymentsException;
+import com.payments.web.command.AbstractCommand;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.View;
 import java.io.IOException;
@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AccountsListCommand extends AbstractCommand {
+public class AdminAccountsListCommand extends AbstractCommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException, PaymentsException
+            throws ServletException, IOException
     {
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
         CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();

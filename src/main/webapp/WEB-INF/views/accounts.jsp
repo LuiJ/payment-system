@@ -10,6 +10,22 @@
 
     <body>
         
+        <c:if test="${not empty loggedUser}">
+            <table border="0" cellpadding="10">
+                <tr>
+                    <td><b>Username:</b> ${loggedUser.login}</td>
+                    <td>
+                        <c:url value="/j_spring_security_logout" var="logoutUrl" />
+                        <form method="POST" action="${logoutUrl}">
+                            <input type="submit" name="logout" value="Logout" />
+                        </form>
+                    </td>
+                </tr>
+            </table>
+            <hr/>
+        </c:if>
+                        
+        
         <h1>Accounts List:</h1>
             
         <c:choose>

@@ -2,12 +2,19 @@ create database payment_system;
 use payment_system;
 
 
+CREATE TABLE IF NOT EXISTS `role` (
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `role_name` varchar(512) NOT NULL UNIQUE,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 CREATE TABLE IF NOT EXISTS `admin` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
     `login` varchar(512) NOT NULL UNIQUE,
     `password` varchar(64) NOT NULL,
-    `salt` varchar(20) NOT NULL,
-    PRIMARY KEY (`id`)
+    `role_id` int(10) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -15,10 +22,11 @@ CREATE TABLE IF NOT EXISTS `user` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
     `login` varchar(512) NOT NULL UNIQUE,
     `password` varchar(64) NOT NULL,
-    `salt` varchar(20) NOT NULL,
+    `role_id` int(10) DEFAULT NULL,
     `first_name` varchar(512) DEFAULT NULL,
     `last_name` varchar(512) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    KEY `role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -57,6 +65,14 @@ CREATE TABLE IF NOT EXISTS `operation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+
 ALTER TABLE `account`
   ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -69,15 +85,20 @@ ALTER TABLE `card`
   ADD CONSTRAINT `card_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 
-INSERT INTO `admin` (`id`, `login`, `password`, `salt`) VALUES
-(1, 'admin1', '12edc7b4ebe670159074dfd7b22a47ee', '0adc3949ba59abbe56e0'),
-(2, 'admin2', '3e5cc78a82aa2392d67350736b1f4258', '70159074dfd7b22a47ee');
+INSERT INTO `role` (`id`, `role_name`) VALUES
+(1, 'ROLE_ADMIN'),
+(2, 'ROLE_USER');
 
 
-INSERT INTO `user` (`id`, `login`, `password`, `salt`, `first_name`, `last_name`) VALUES
-(1, 'user1', 'c73e6f014aba61cc9b2a95b0d908cf22', '2392d67350736b1f4258', 'Ivan', 'Sidorov'),
-(2, 'user2', 'a29fa3fcc50d61defd2344642c68727b', '61cc9b2a95b0d908cf22', 'Semen', 'Smirnov'),
-(3, 'user3', '2656b5202ab5f9e04a82f7e1b7ef5eca', '61defd2344642c68727b', 'Viktor', 'Ivanov');
+INSERT INTO `admin` (`id`, `login`, `password`, `role_id`) VALUES
+(1, 'admin1', 'pwd1', 1),
+(2, 'admin2', 'pwd2', 1);
+
+
+INSERT INTO `user` (`id`, `login`, `password`, `role_id`, `first_name`, `last_name`) VALUES
+(1, 'user1', 'pwd1', 2, 'Ivan', 'Sidorov'),
+(2, 'user2', 'pwd2', 2, 'Semen', 'Smirnov'),
+(3, 'user3', 'pwd3', 2, 'Viktor', 'Ivanov');
 
 
 INSERT INTO `account` (`id`, `number`, `status`, `amount`, `user_id`) VALUES

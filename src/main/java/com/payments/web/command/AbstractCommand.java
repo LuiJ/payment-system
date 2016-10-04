@@ -1,6 +1,5 @@
 package com.payments.web.command;
 
-import com.payments.exception.PaymentsException;
 import com.payments.web.view.Renderer;
 import com.payments.web.view.View;
 import java.io.IOException;
@@ -19,7 +18,7 @@ public abstract class AbstractCommand implements Command {
     
     @Override
     public abstract void execute(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException, PaymentsException;
+            throws ServletException, IOException;
     
     
     protected void render(HttpServletRequest request, HttpServletResponse response, View view) 

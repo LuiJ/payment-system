@@ -5,7 +5,10 @@ public enum View {
     
     PAGE_NOT_FOUND("page_not_found"), 
     ADMIN_LOGIN("admin_login"),
-    ACCOUNTS("accounts");
+    USER_LOGIN("user_login"),
+    ACCOUNTS("accounts"),
+    ACCESS_DENIED("access_denied"),
+    HOME("home");
     
     private final String VIEW_PREFIX = "/WEB-INF/views/";
     private final String VIEW_SUFFIX = ".jsp";
