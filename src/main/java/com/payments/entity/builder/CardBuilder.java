@@ -1,8 +1,8 @@
-package com.payments.parser.resultset;
+package com.payments.entity.builder;
 
 import com.payments.entity.Identifiable;
 import com.payments.entity.Status;
-import com.payments.entity.card.Card;
+import com.payments.entity.Card;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

@@ -1,11 +1,11 @@
-package com.payments.parser.resultset;
+package com.payments.entity.builder;
 
-import com.payments.entity.account.Account;
-import com.payments.entity.admin.Admin;
-import com.payments.entity.card.Card;
-import com.payments.entity.operation.Operation;
-import com.payments.entity.role.Role;
-import com.payments.entity.user.User;
+import com.payments.entity.Account;
+import com.payments.entity.Admin;
+import com.payments.entity.Card;
+import com.payments.entity.Operation;
+import com.payments.entity.Role;
+import com.payments.entity.User;
 
 
 public class EntityBuilderFactory {

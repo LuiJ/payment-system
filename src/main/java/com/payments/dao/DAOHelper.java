@@ -131,9 +131,10 @@ public class DAOHelper <T extends Identifiable> {
             
             Class<?>[] interfaces = method.getReturnType().getInterfaces();
             boolean isCollection = Arrays.asList(interfaces).contains(Collection.class);
+            boolean isIdentifiable = Arrays.asList(interfaces).contains(Identifiable.class);
             
             if (methodPrefix.equalsIgnoreCase("get") && !isCollection &&
-                !methodName.equalsIgnoreCase("getClass"))
+                !isIdentifiable && !methodName.equalsIgnoreCase("getClass"))
             {                
                 String fieldName = methodName.substring(3);
                 fieldName = splitCamelCase(fieldName).toLowerCase();
@@ -143,7 +144,8 @@ public class DAOHelper <T extends Identifiable> {
                     fieldValue = String.valueOf(result);
                 }
                 catch (IllegalAccessException | InvocationTargetException | ClassCastException e){
-                    e.printStackTrace();
+                    logger.error(e.getMessage(), e);
+                    throw new IllegalStateException(e.getMessage());
                 }
                 
                 if (!fieldValue.equalsIgnoreCase("0") && fieldValue != null){

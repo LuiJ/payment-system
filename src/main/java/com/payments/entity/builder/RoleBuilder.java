@@ -1,7 +1,7 @@
-package com.payments.parser.resultset;
+package com.payments.entity.builder;
 
 import com.payments.entity.Identifiable;
-import com.payments.entity.role.Role;
+import com.payments.entity.Role;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

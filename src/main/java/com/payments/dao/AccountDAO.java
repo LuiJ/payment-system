@@ -1,6 +1,6 @@
 package com.payments.dao;
 
-import com.payments.entity.account.Account;
+import com.payments.entity.Account;
 import java.util.List;
 import java.util.Properties;
 

@@ -1,4 +1,4 @@
-package com.payments.entity.admin;
+package com.payments.entity;
 
 import com.payments.entity.AbstractUser;
 

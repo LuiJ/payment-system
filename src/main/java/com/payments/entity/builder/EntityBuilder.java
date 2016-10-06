@@ -1,4 +1,4 @@
-package com.payments.parser.resultset;
+package com.payments.entity.builder;
 
 import com.payments.entity.Identifiable;
 import java.sql.ResultSet;

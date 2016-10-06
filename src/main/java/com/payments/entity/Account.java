@@ -1,8 +1,7 @@
-package com.payments.entity.account;
+package com.payments.entity;
 
 import com.payments.entity.Identifiable;
 import com.payments.entity.Status;
-import com.payments.entity.card.Card;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

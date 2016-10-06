@@ -1,6 +1,6 @@
 package com.payments.dao;
 
-import com.payments.entity.role.Role;
+import com.payments.entity.Role;
 
 
 public class RoleDAO extends AbstractDAO<Role> {

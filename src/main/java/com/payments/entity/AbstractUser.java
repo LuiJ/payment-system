@@ -1,7 +1,12 @@
 package com.payments.entity;
 
+import java.util.Collection;
+import java.util.Collections;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class AbstractUser implements Identifiable {
+
+public class AbstractUser implements Identifiable, UserDetails {
 
     public static final String FIELD_ID = "id";
     public static final String FIELD_LOGIN = "login";
@@ -12,6 +17,7 @@ public class AbstractUser implements Identifiable {
     private String login;
     private String password;
     private int roleId;
+    private Role role;
     
     public AbstractUser(){}
 
@@ -24,6 +30,11 @@ public class AbstractUser implements Identifiable {
     public void setId(int id) {
         this.id = id;
     }
+    
+    @Override
+    public String getUsername(){
+        return login;
+    }
 
     public String getLogin() {
         return login;
@@ -33,6 +44,7 @@ public class AbstractUser implements Identifiable {
         this.login = login;
     }
     
+    @Override
     public String getPassword() {
         return password;
     }
@@ -48,6 +60,41 @@ public class AbstractUser implements Identifiable {
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
+    @Override
+    public Collection<GrantedAuthority> getAuthorities(){
+        GrantedAuthority grantedAuthority = (GrantedAuthority) role;
+        Collection<GrantedAuthority> grantedAuthorities = Collections.singleton(grantedAuthority);
+        return grantedAuthorities;
+    }
+    
+    @Override
+    public boolean isAccountNonExpired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAccountNonLocked(){
+        return true;
+    }
+    
+    @Override
+    public boolean isCredentialsNonExpired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isEnabled(){
+        return true;
+    }    
     
     @Override
     public String toString(){

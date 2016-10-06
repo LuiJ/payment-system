@@ -1,8 +1,8 @@
-package com.payments.entity.user;
+package com.payments.entity;
 
 import com.payments.entity.AbstractUser;
-import com.payments.entity.account.Account;
-import com.payments.entity.operation.Operation;
+import com.payments.entity.Account;
+import com.payments.entity.Operation;
 import java.util.ArrayList;
 import java.util.List;
 

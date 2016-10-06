@@ -1,8 +1,8 @@
-package com.payments.parser.resultset;
+package com.payments.entity.builder;
 
 import com.payments.entity.Identifiable;
-import com.payments.entity.operation.Operation;
-import com.payments.entity.operation.OperationType;
+import com.payments.entity.Operation;
+import com.payments.entity.OperationType;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,8 +1,8 @@
 package com.payments.db;
 
 import com.payments.entity.Identifiable;
-import com.payments.parser.resultset.EntityBuilder;
-import com.payments.parser.resultset.EntityBuilderFactory;
+import com.payments.entity.builder.EntityBuilder;
+import com.payments.entity.builder.EntityBuilderFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

@@ -2,10 +2,8 @@ package com.payments.security;
 
 import com.payments.dao.AdminDAO;
 import com.payments.dao.DAOFactory;
-import com.payments.dao.RoleDAO;
 import com.payments.dao.UserDAO;
 import com.payments.entity.AbstractUser;
-import com.payments.entity.role.Role;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,14 +26,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             if (user == null){
                 throw new UsernameNotFoundException("User doesn't exist");
             }
-        }
-        
-        int roleId = user.getRoleId();
-        RoleDAO roleDAO = DAOFactory.INSTANCE.getRoleDAO();
-        Role role = roleDAO.getById(roleId);
-        
-        UserDetails userDetails = new UserDetailsImpl(user, role);       
-        return userDetails;
+        }        
+        return user;
     }
     
 }

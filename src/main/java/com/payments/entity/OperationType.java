@@ -1,4 +1,4 @@
-package com.payments.entity.operation;
+package com.payments.entity;
 
 
 public enum OperationType {

@@ -1,4 +1,4 @@
-package com.payments.entity.role;
+package com.payments.entity;
 
 import com.payments.entity.Identifiable;
 import org.springframework.security.core.GrantedAuthority;

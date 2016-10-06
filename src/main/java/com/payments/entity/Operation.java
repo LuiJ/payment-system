@@ -1,4 +1,4 @@
-package com.payments.entity.operation;
+package com.payments.entity;
 
 import com.payments.entity.Identifiable;
 import java.math.BigDecimal;

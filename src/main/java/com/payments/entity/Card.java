@@ -1,4 +1,4 @@
-package com.payments.entity.card;
+package com.payments.entity;
 
 import com.payments.entity.Checkable;
 import com.payments.entity.Identifiable;
