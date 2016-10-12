@@ -1,9 +1,5 @@
 package com.payments.entity;
 
-import com.payments.entity.Checkable;
-import com.payments.entity.Identifiable;
-import com.payments.entity.Status;
-
 
 public class Card implements Identifiable, Checkable {
     

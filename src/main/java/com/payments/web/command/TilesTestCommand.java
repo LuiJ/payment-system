@@ -1,4 +1,4 @@
-package com.payments.web.view;
+package com.payments.web.command;
 
 import java.io.IOException;
 import javax.servlet.ServletContext;
@@ -10,15 +10,16 @@ import org.apache.tiles.TilesContainer;
 import org.apache.tiles.access.TilesAccess;
 
 
-public class Renderer {
+public class TilesTestCommand extends AbstractCommand {
     
-    public void render(HttpServletRequest request, HttpServletResponse response, View view) 
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
     {
-        String viewName = view.getViewName();
         HttpSession session = request.getSession();
         ServletContext context = session.getServletContext();
         TilesContainer container = TilesAccess.getContainer(context);
-        container.render(viewName, request, response);
-    }    
+        container.render("user_accounts", request, response);
+    }
+    
 }

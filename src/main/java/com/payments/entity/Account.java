@@ -1,7 +1,5 @@
 package com.payments.entity;
 
-import com.payments.entity.Identifiable;
-import com.payments.entity.Status;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +19,7 @@ public class Account implements Identifiable {
     private Status status;
     private BigDecimal amount;
     private int userId;
+    private User user;
     private List<Card> cards;
     
     public Account(){
@@ -67,6 +66,14 @@ public class Account implements Identifiable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Card> getCards() {

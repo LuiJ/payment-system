@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
     `login` varchar(512) NOT NULL UNIQUE,
     `password` varchar(64) NOT NULL,
     `role_id` int(10) DEFAULT NULL,
+    `first_name` varchar(512) DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -90,9 +91,9 @@ INSERT INTO `role` (`id`, `role_name`) VALUES
 (2, 'ROLE_USER');
 
 
-INSERT INTO `admin` (`id`, `login`, `password`, `role_id`) VALUES
-(1, 'admin1', 'pwd1', 1),
-(2, 'admin2', 'pwd2', 1);
+INSERT INTO `admin` (`id`, `login`, `password`, `role_id`, `first_name`) VALUES
+(1, 'admin1', 'pwd1', 1, 'Aliaksei'),
+(2, 'admin2', 'pwd2', 1, 'Filipp');
 
 
 INSERT INTO `user` (`id`, `login`, `password`, `role_id`, `first_name`, `last_name`) VALUES

@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AdminAccountsListCommand extends AbstractCommand {
 
+    private static final String PAGE = "accounts";
+    
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
@@ -29,7 +31,9 @@ public class AdminAccountsListCommand extends AbstractCommand {
             int accountId = account.getId();
             List<Card> cards = cardDAO.getAllByAccountId(accountId);
             account.setCards(cards);
-        }        
+        }  
+        
+        request.setAttribute(Attribute.PAGE, PAGE);
         request.setAttribute(Attribute.ACCOUNTS, accounts);        
         render(request, response, View.ACCOUNTS);
     }

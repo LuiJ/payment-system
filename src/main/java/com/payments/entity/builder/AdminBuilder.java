@@ -12,7 +12,11 @@ public class AdminBuilder extends AbstractUserBuilder {
     @Override
     public Identifiable build(ResultSet adminResultSet) throws SQLException {
     
-        Admin admin = (Admin) super.build(adminResultSet);        
+        Admin admin = (Admin) super.build(adminResultSet);  
+        
+        String firstName = adminResultSet.getString(Admin.FIELD_FIRST_NAME);
+        admin.setFirstName(firstName);
+        
         return admin;
     }
     

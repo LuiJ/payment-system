@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 
 
 public class UserAccountsListCommand extends AbstractCommand {
+    
+    private static final String PAGE = "accounts";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
@@ -38,6 +40,7 @@ public class UserAccountsListCommand extends AbstractCommand {
             account.setCards(cards);
         } 
         
+        request.setAttribute(Attribute.PAGE, PAGE);
         request.setAttribute(Attribute.ACCOUNTS, accounts);        
         render(request, response, View.ACCOUNTS);
     }

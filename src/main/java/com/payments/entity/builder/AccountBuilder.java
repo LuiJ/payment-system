@@ -1,8 +1,11 @@
 package com.payments.entity.builder;
 
+import com.payments.dao.DAOFactory;
+import com.payments.dao.UserDAO;
 import com.payments.entity.Identifiable;
 import com.payments.entity.Status;
 import com.payments.entity.Account;
+import com.payments.entity.User;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +32,10 @@ public class AccountBuilder implements EntityBuilder {
         
         int userId = accountResultSet.getInt(Account.FIELD_USER_ID);
         account.setUserId(userId);
+        
+        UserDAO userDAO = DAOFactory.INSTANCE.getUserDAO();
+        User user = userDAO.getById(userId);
+        account.setUser(user);
         
         return account;        
     }

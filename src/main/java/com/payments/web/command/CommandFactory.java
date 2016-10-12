@@ -28,6 +28,7 @@ public class CommandFactory {
     private static final String LOGIN = "/login";
     private static final String LOGIN_FAILED = "/login-failed";
     private static final String ACCESS_DENIED = "/denied";
+    private static final String TILES_TEST = "/tiles";
     
     
     public static Command create(HttpServletRequest request)
@@ -78,6 +79,9 @@ public class CommandFactory {
                 break;
             case USER_ACCOUNTS:
                 command = new UserAccountsListCommand();
+                break;
+            case TILES_TEST:
+                command = new TilesTestCommand();
                 break;
             default: 
                 command = new PageNotFoundCommand();

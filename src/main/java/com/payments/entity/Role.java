@@ -1,6 +1,5 @@
 package com.payments.entity;
 
-import com.payments.entity.Identifiable;
 import org.springframework.security.core.GrantedAuthority;
 
 

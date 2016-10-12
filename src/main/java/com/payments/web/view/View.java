@@ -3,24 +3,21 @@ package com.payments.web.view;
 
 public enum View {
     
+    HOME("home"),
     PAGE_NOT_FOUND("page_not_found"), 
+    ACCESS_DENIED("denied"),
+    
     ADMIN_LOGIN("admin_login"),
     USER_LOGIN("user_login"),
-    ACCOUNTS("accounts"),
-    ACCESS_DENIED("access_denied"),
-    HOME("home");
-    
-    private final String VIEW_PREFIX = "/WEB-INF/views/";
-    private final String VIEW_SUFFIX = ".jsp";
+    ACCOUNTS("accounts");
     
     private final String viewName;
     
     View(String viewName){
         this.viewName = viewName;
     }
-    
-    public String getPageFullName(){
-        String pageFullName = VIEW_PREFIX + viewName + VIEW_SUFFIX;
-        return pageFullName;
-    }   
+
+    public String getViewName() {
+        return viewName;
+    }    
 }
