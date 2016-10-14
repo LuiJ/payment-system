@@ -20,6 +20,7 @@ public class Operation implements Identifiable {
     private BigDecimal amount;
     private String description;
     private int userId;
+    private User user;
 
     @Override
     public int getId() {
@@ -70,6 +71,14 @@ public class Operation implements Identifiable {
     public void setUserId(int userId) {
         this.userId = userId;
     }    
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
     @Override
     public String toString(){

@@ -1,5 +1,8 @@
 package com.payments.entity.builder;
 
+import com.payments.dao.AccountDAO;
+import com.payments.dao.DAOFactory;
+import com.payments.entity.Account;
 import com.payments.entity.Identifiable;
 import com.payments.entity.Status;
 import com.payments.entity.Card;
@@ -31,6 +34,10 @@ public class CardBuilder implements EntityBuilder {
         
         int accountId = cardResultSet.getInt(Card.FIELD_ACCOUNT_ID);
         card.setAccountId(accountId);
+        
+        AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
+        Account account = accountDAO.getById(accountId);
+        card.setAccount(account);
         
         return card;
     }

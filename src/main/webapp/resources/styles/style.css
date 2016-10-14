@@ -8,7 +8,7 @@
 }
 #page-wrap {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     padding: 90px 0 55px 0;
     box-sizing: border-box;
     position: relative;
@@ -91,7 +91,6 @@
 #content-wrap {
     width: 100%;
     height: auto;
-    overflow: hidden;
 }
 #menu {
     width: 280px;
@@ -189,3 +188,34 @@
     font-size: 15px;
     font-family: Consolas, sans-serif;
 }
+.table .btn {
+    background-color: #0073c7;
+}
+.info-msg {
+    display: inline-block;
+    width: 50%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background-color: #cccccc;
+    color: #333333;
+    font-size: 14px;
+    border-radius: 3px;
+}
+#preloader {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 30px 0;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    font-size: 30px;
+    line-height: 1;
+    color: #ffffff;
+    font-family: Consolas, sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+

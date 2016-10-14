@@ -4,9 +4,11 @@ import com.payments.db.DbHelper;
 import com.payments.entity.Identifiable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
@@ -18,6 +20,7 @@ import org.apache.log4j.Logger;
 public class DAOHelper <T extends Identifiable> {
     
     private static final Logger logger = Logger.getLogger(DAOHelper.class);
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     
     private enum ResultTypeEnum {
         PARAMS_AND_VALUES, PARAMS, VALUES;
@@ -129,7 +132,8 @@ public class DAOHelper <T extends Identifiable> {
             String methodName = method.getName();
             String methodPrefix = methodName.substring(0, 3); 
             
-            Class<?>[] interfaces = method.getReturnType().getInterfaces();
+            Class<?> methodReturnType = method.getReturnType();
+            Class<?>[] interfaces = methodReturnType.getInterfaces();
             boolean isCollection = Arrays.asList(interfaces).contains(Collection.class);
             boolean isIdentifiable = Arrays.asList(interfaces).contains(Identifiable.class);
             
@@ -141,7 +145,14 @@ public class DAOHelper <T extends Identifiable> {
                 String fieldValue = null;
                 try {
                     Object result = method.invoke(entity);
-                    fieldValue = String.valueOf(result);
+                    if (methodReturnType == Date.class){
+                        Date date = (Date) result;
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
+                        fieldValue = dateFormatter.format(date);
+                    }
+                    else {
+                        fieldValue = String.valueOf(result);
+                    }                    
                 }
                 catch (IllegalAccessException | InvocationTargetException | ClassCastException e){
                     logger.error(e.getMessage(), e);

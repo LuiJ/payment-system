@@ -23,13 +23,13 @@
 		<put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
 	</definition>
         
-        <definition name="user_login" extends="common">
-		<put-attribute name="content" value="/WEB-INF/views/user_login.jsp" />
-	</definition>
-        
         <definition name="admin_login" extends="common">
                 <put-attribute name="title" value="Admin" />
-		<put-attribute name="content" value="/WEB-INF/views/admin_login.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/admin/login.jsp" />
+	</definition>
+        
+        <definition name="user_login" extends="common">
+		<put-attribute name="content" value="/WEB-INF/views/user/login.jsp" />
 	</definition>
         
         
@@ -42,9 +42,34 @@
 		<put-attribute name="footer" value="/WEB-INF/views/layouts/common/footer.jsp" />
 	</definition>
         
-        <definition name="accounts" extends="specific">
+        <definition name="admin_accounts" extends="specific">
+                <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/admin/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/admin/accounts.jsp" />
+	</definition>
+        
+        <definition name="admin_cards" extends="specific">
+                <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/admin/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/admin/cards.jsp" />
+	</definition>
+        
+        <definition name="admin_operations" extends="specific">
+                <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/admin/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/admin/operations.jsp" />
+	</definition>
+        
+        <definition name="user_accounts" extends="specific">
                 <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/user/menu.jsp" />
-		<put-attribute name="content" value="/WEB-INF/views/accounts.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/user/accounts.jsp" />
+	</definition>
+        
+        <definition name="user_cards" extends="specific">
+                <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/user/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/user/cards.jsp" />
+	</definition>
+        
+        <definition name="user_operations" extends="specific">
+                <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/user/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/user/operations.jsp" />
 	</definition>
         
 </tiles-definitions>

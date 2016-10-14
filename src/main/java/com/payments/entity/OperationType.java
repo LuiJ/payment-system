@@ -2,5 +2,10 @@ package com.payments.entity;
 
 
 public enum OperationType {
-    PAYMENT, CARD_BLOCKING, ACCOUNT_CLOSING;
+    
+    PAYMENT, 
+    RECEIVE_MONEY, 
+    CARD_BLOCKING, 
+    CARD_ACTIVATING, 
+    ACCOUNT_CLOSING;
 }

@@ -1,7 +1,7 @@
 package com.payments.entity;
 
 
-public class Card implements Identifiable, Checkable {
+public class Card implements Identifiable {
     
     public static final String TABLE_NAME = "card";
     public static final String FIELD_ID = "id";
@@ -17,6 +17,7 @@ public class Card implements Identifiable, Checkable {
     private String salt;
     private Status status;
     private int accountId;
+    private Account account;
 
     @Override
     public int getId() {
@@ -35,11 +36,6 @@ public class Card implements Identifiable, Checkable {
     public void setNumber(long number) {
         this.number = number;
     }
-    
-    @Override
-    public String getPassword() {
-        return pinCode;
-    }
 
     public String getPinCode() {
         return pinCode;
@@ -49,7 +45,6 @@ public class Card implements Identifiable, Checkable {
         this.pinCode = pinCode;
     }
 
-    @Override
     public String getSalt() {
         return salt;
     }
@@ -72,6 +67,14 @@ public class Card implements Identifiable, Checkable {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
     
     @Override

@@ -8,9 +8,15 @@ public enum View {
     ACCESS_DENIED("denied"),
     
     ADMIN_LOGIN("admin_login"),
-    USER_LOGIN("user_login"),
-    ACCOUNTS("accounts");
+    ADMIN_ACCOUNTS("admin_accounts"), 
+    ADMIN_CARDS("admin_cards"),
+    ADMIN_OPERATIONS("admin_operations"),
     
+    USER_LOGIN("user_login"),
+    USER_ACCOUNTS("user_accounts"),
+    USER_CARDS("user_cards"),
+    USER_OPERATIONS("user_operations");
+        
     private final String viewName;
     
     View(String viewName){

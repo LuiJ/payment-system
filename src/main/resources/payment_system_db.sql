@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `card` (
 CREATE TABLE IF NOT EXISTS `operation` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
     `date` datetime  DEFAULT NULL,
-    `type` ENUM('PAYMENT', 'CARD_BLOCKING', 'ACCOUNT_CLOSING'),
+    `type` ENUM('PAYMENT', 'RECEIVE_MONEY', 'CARD_BLOCKING', 'CARD_ACTIVATING', 'ACCOUNT_CLOSING'),
     `amount` decimal(15,2) DEFAULT NULL,
     `description` varchar(512) DEFAULT NULL,   
     `user_id` int(10) DEFAULT NULL,

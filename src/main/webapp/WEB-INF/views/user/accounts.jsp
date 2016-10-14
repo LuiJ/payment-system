@@ -9,8 +9,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>Number</td>
-                    <td>Owner</td>
+                    <td>Account No.</td>
                     <td>Status</td>
                     <td>Amount</td>
                     <td>Cards</td>
@@ -21,7 +20,6 @@
 
                     <tr>
                         <td>${account.number}</td>
-                        <td>${account.user.lastName}, ${account.user.firstName}</td>
                         <td>${account.status}</td>
                         <td>${account.amount}</td>
                         <td>

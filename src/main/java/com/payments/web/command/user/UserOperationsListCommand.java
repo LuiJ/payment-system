@@ -1,10 +1,8 @@
 package com.payments.web.command.user;
 
-import com.payments.dao.AccountDAO;
-import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
-import com.payments.entity.Account;
-import com.payments.entity.Card;
+import com.payments.dao.OperationDAO;
+import com.payments.entity.Operation;
 import com.payments.entity.User;
 import com.payments.web.command.AbstractCommand;
 import com.payments.web.view.Attribute;
@@ -17,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class UserAccountsListCommand extends AbstractCommand {
+public class UserOperationsListCommand extends AbstractCommand {
     
-    private static final String PAGE = "accounts";
+    private static final String PAGE = "operations";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
@@ -29,20 +27,11 @@ public class UserAccountsListCommand extends AbstractCommand {
         User user = (User) session.getAttribute(Attribute.LOGGED_USER);
         int userId = user.getId();
         
-        AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
-        List<Account> accounts = accountDAO.getAllByUserId(userId);
-                
-        CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
-        
-        for (Account account : accounts){
-            int accountId = account.getId();
-            List<Card> cards = cardDAO.getAllByAccountId(accountId);
-            account.setCards(cards);
-        } 
+        OperationDAO operationDAO = DAOFactory.INSTANCE.getOperationDAO();
+        List<Operation> operations = operationDAO.getAllByUserId(userId);
         
         request.setAttribute(Attribute.PAGE, PAGE);
-        request.setAttribute(Attribute.ACCOUNTS, accounts);        
-        render(request, response, View.USER_ACCOUNTS);
-    }
-    
+        request.setAttribute(Attribute.OPERATIONS, operations);        
+        render(request, response, View.USER_OPERATIONS);
+    }    
 }

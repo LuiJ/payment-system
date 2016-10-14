@@ -1,11 +1,18 @@
 package com.payments.web.command;
 
 import com.payments.web.command.admin.AdminLoginFailedCommand;
-import com.payments.web.command.user.UserAccountsListCommand;
-import com.payments.web.command.user.UserLoginPageCommand;
 import com.payments.web.command.admin.AdminLoginPageCommand;
 import com.payments.web.command.admin.AdminAccountsListCommand;
+import com.payments.web.command.admin.AdminCardsActivateCommand;
+import com.payments.web.command.admin.AdminCardsBlockCommand;
+import com.payments.web.command.admin.AdminCardsListCommand;
+import com.payments.web.command.admin.AdminOperationsListCommand;
+import com.payments.web.command.user.UserAccountsListCommand;
+import com.payments.web.command.user.UserCardsBlockCommand;
+import com.payments.web.command.user.UserLoginPageCommand;
+import com.payments.web.command.user.UserCardsListCommand;
 import com.payments.web.command.user.UserLoginFailedCommand;
+import com.payments.web.command.user.UserOperationsListCommand;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -19,16 +26,22 @@ public class CommandFactory {
     private static final String ADMIN = "admin";    
     private static final String ADMIN_HOME = "/admin";
     private static final String ADMIN_ACCOUNTS = "/admin/accounts";
+    private static final String ADMIN_CARDS = "/admin/cards";
+    private static final String ADMIN_CARD_BLOCK = "/admin/card-block";
+    private static final String ADMIN_CARD_ACTIVATE = "/admin/card-activate";
+    private static final String ADMIN_OPERATIONS = "/admin/operations";    
        
     private static final String USER = "user";     
     private static final String USER_HOME = "/user";
     private static final String USER_ACCOUNTS = "/user/accounts";
+    private static final String USER_CARDS = "/user/cards";
+    private static final String USER_CARD_BLOCK = "/user/card-block";
+    private static final String USER_OPERATIONS = "/user/operations";
         
     private static final String HOME = "/";
     private static final String LOGIN = "/login";
     private static final String LOGIN_FAILED = "/login-failed";
     private static final String ACCESS_DENIED = "/denied";
-    private static final String TILES_TEST = "/tiles";
     
     
     public static Command create(HttpServletRequest request)
@@ -74,14 +87,23 @@ public class CommandFactory {
             case ADMIN_ACCOUNTS:
                 command = new AdminAccountsListCommand();
                 break;
+            case ADMIN_CARDS:
+                command = new AdminCardsListCommand();
+                break;
+            case ADMIN_OPERATIONS:
+                command = new AdminOperationsListCommand();
+                break;
             case USER_HOME:
                 command = new UserAccountsListCommand();
                 break;
             case USER_ACCOUNTS:
                 command = new UserAccountsListCommand();
                 break;
-            case TILES_TEST:
-                command = new TilesTestCommand();
+            case USER_CARDS:
+                command = new UserCardsListCommand();
+                break;
+            case USER_OPERATIONS:
+                command = new UserOperationsListCommand();
                 break;
             default: 
                 command = new PageNotFoundCommand();
@@ -96,6 +118,15 @@ public class CommandFactory {
         String requestCommand = getRequestCommand(request);
         
         switch (requestCommand){
+            case ADMIN_CARD_BLOCK:
+                command = new AdminCardsBlockCommand();
+                break;                
+            case ADMIN_CARD_ACTIVATE:
+                command = new AdminCardsActivateCommand();
+                break;
+            case USER_CARD_BLOCK:
+                command = new UserCardsBlockCommand();
+                break;
             default: 
                 command = new PageNotFoundCommand();
         }

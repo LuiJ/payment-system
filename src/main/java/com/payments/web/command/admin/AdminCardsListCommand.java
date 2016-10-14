@@ -9,33 +9,36 @@ import com.payments.web.command.AbstractCommand;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.View;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AdminAccountsListCommand extends AbstractCommand {
-
-    private static final String PAGE = "accounts";
+public class AdminCardsListCommand extends AbstractCommand {
     
+    private static final String PAGE = "cards";
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {
+    {       
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
-        CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
         List<Account> accounts = accountDAO.getAll();
+                
+        CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
+        
+        List<Card> cards = new ArrayList<>();
         
         for (Account account : accounts){
             int accountId = account.getId();
-            List<Card> cards = cardDAO.getAllByAccountId(accountId);
-            account.setCards(cards);
-        }  
+            List<Card> cardsInAccoutn = cardDAO.getAllByAccountId(accountId);
+            cards.addAll(cardsInAccoutn);
+        } 
         
         request.setAttribute(Attribute.PAGE, PAGE);
-        request.setAttribute(Attribute.ACCOUNTS, accounts);        
-        render(request, response, View.ADMIN_ACCOUNTS);
-    }
-    
+        request.setAttribute(Attribute.CARDS, cards);        
+        render(request, response, View.ADMIN_CARDS);
+    }    
 }
