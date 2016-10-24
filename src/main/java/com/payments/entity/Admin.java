@@ -1,7 +1,7 @@
 package com.payments.entity;
 
 
-public class Admin extends AbstractUser implements Identifiable {
+public class Admin extends AbstractUser {
     
     public static final String TABLE_NAME = "admin";
     public static final String FIELD_FIRST_NAME = "first_name";

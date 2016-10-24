@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 
 
 public class OperationService {
-
-    private static final String CARD_ID_PARAMETER = "cardId";
     
     private final OperationDAO operationDAO;
     
@@ -50,7 +48,7 @@ public class OperationService {
                                        Class<? extends AbstractUser> userType)
     {
         Operation operation = createOperation();        
-        operation.setType(OperationType.CARD_ACTIVATING);
+        operation.setType(OperationType.ACCOUNT_CLOSING);
         operation.setAmount(BigDecimal.ZERO);
         
         Card card = getCard(request);
@@ -59,6 +57,25 @@ public class OperationService {
         operation.setDescription(description);  
         
         int userId = getUserIdByCard(card);
+        operation.setUserId(userId);
+        
+        operationDAO.save(operation); 
+    }
+    
+    
+    public void saveAccountCloseOperation(HttpServletRequest request, 
+                                       Class<? extends AbstractUser> userType)
+    {
+        Operation operation = createOperation();        
+        operation.setType(OperationType.ACCOUNT_CLOSING);
+        operation.setAmount(BigDecimal.ZERO);
+        
+        Account account = getAccount(request);
+        long accountNumber = account.getNumber();
+        String description = getDescription(OperationType.ACCOUNT_CLOSING, userType, accountNumber);
+        operation.setDescription(description);  
+        
+        int userId = getUserIdByAccount(account);
         operation.setUserId(userId);
         
         operationDAO.save(operation);
@@ -74,11 +91,19 @@ public class OperationService {
     }
     
     private Card getCard(HttpServletRequest request){
-        String cardIdParameter = request.getParameter(CARD_ID_PARAMETER);
+        String cardIdParameter = request.getParameter(Parameter.CARD_ID.getParameter());
         int cardId = Integer.parseInt(cardIdParameter); 
         CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
         Card card = cardDAO.getById(cardId);
         return card;
+    }
+    
+    private Account getAccount(HttpServletRequest request){
+        String accountIdParameter = request.getParameter(Parameter.ACCOUNT_ID.getParameter());
+        int accountId = Integer.parseInt(accountIdParameter); 
+        AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
+        Account account = accountDAO.getById(accountId);
+        return account;
     }
     
     private int getUserIdByAccount(Account account){
@@ -100,19 +125,24 @@ public class OperationService {
     {
         String description = null;
         if (operationType == OperationType.CARD_BLOCKING && 
-            userType == User.class)
+                 userType == User.class)
         {
             description = "Card " + itemNumber + " has been blocked by user.";
         }
         else if (operationType == OperationType.CARD_BLOCKING && 
-                 userType == Admin.class)
+                      userType == Admin.class)
         {
             description = "Card " + itemNumber + " has been blocked by admin.";
         }
         else if (operationType == OperationType.CARD_ACTIVATING && 
-                 userType == Admin.class)
+                      userType == Admin.class)
         {
             description = "Card " + itemNumber + " has been activated by admin.";
+        }
+        else if (operationType == OperationType.ACCOUNT_CLOSING && 
+                      userType == User.class)
+        {
+            description = "Account " + itemNumber + " has been closed.";
         }
         else {
             throw new IllegalArgumentException();

@@ -16,11 +16,14 @@
     </head>
     
     <body>
-        <div id="page-wrap">
-            <tiles:insertAttribute name="header"/>
-            <tiles:insertAttribute name="content"/>
-            <tiles:insertAttribute name="footer"/>
-        </div>          
+        <tiles:insertAttribute name="header"/>
+        <div id="content-wrap">
+            <div id="common-content">
+                <tiles:insertAttribute name="content"/>
+            </div>            
+        </div>
+        <tiles:insertAttribute name="footer"/>
+        
         <div id="preloader">Wait please...</div>
                 
         <script src="${jsUrl}"></script> 

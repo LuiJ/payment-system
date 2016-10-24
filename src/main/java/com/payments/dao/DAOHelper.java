@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
@@ -133,9 +132,8 @@ public class DAOHelper <T extends Identifiable> {
             String methodPrefix = methodName.substring(0, 3); 
             
             Class<?> methodReturnType = method.getReturnType();
-            Class<?>[] interfaces = methodReturnType.getInterfaces();
-            boolean isCollection = Arrays.asList(interfaces).contains(Collection.class);
-            boolean isIdentifiable = Arrays.asList(interfaces).contains(Identifiable.class);
+            boolean isCollection = Collection.class.isAssignableFrom(methodReturnType);
+            boolean isIdentifiable = Identifiable.class.isAssignableFrom(methodReturnType);
             
             if (methodPrefix.equalsIgnoreCase("get") && !isCollection &&
                 !isIdentifiable && !methodName.equalsIgnoreCase("getClass"))

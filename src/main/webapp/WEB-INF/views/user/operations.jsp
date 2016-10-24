@@ -20,7 +20,7 @@
                     <tr>
                         <td>${operation.type}</td>
                         <td>
-                            <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${operation.date}"/>
+                            <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"  timeZone="Europe/Moscow" value="${operation.date}"/>
                         </td>
                         <td>${operation.description}</td>
                         <td>${operation.amount}</td>

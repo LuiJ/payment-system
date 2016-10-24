@@ -16,21 +16,18 @@
     </head>
     
     <body>
-        <div id="page-wrap">
-            <tiles:insertAttribute name="header"/>
-            <div id="content-wrap">
-                <div id="menu">
-                    <tiles:insertAttribute name="menu"/>
-                </div>
-                <div>
-                    <div id="specific-content">
-                        <tiles:insertAttribute name="content"/>
-                    </div>                    
-                </div>
-                <div class="clear"></div>
-            </div>            
-            <tiles:insertAttribute name="footer"/>
-        </div> 
+        <tiles:insertAttribute name="header"/>
+        <div id="content-wrap">
+            <div id="menu">
+                <tiles:insertAttribute name="menu"/>
+            </div>
+            <div id="specific-content">
+                <tiles:insertAttribute name="content"/>
+            </div> 
+            <div class="clear"></div>
+        </div>            
+        <tiles:insertAttribute name="footer"/>
+        
         <div id="preloader">Wait please...</div>
                 
         <script src="${jsUrl}"></script>

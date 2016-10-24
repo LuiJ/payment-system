@@ -24,8 +24,8 @@
 
                     <tr>
                         <td>${card.number}</td>
-                        <td>${card.account.user.lastName}, ${card.account.user.firstName}</td>
                         <td>${card.account.number}</td>
+                        <td>${card.account.user.lastName}, ${card.account.user.firstName}</td>
                         <td>${card.account.amount}</td>
                         <td>${card.status}</td>
                         <td>

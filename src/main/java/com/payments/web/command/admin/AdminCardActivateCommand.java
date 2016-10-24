@@ -10,17 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AdminCardsBlockCommand extends AbstractCommand {
+public class AdminCardActivateCommand extends AbstractCommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {           
+    {       
         CardService cardService = new CardService();
-        cardService.block(request);
+        cardService.activate(request);
         
         OperationService operationService = new OperationService();
-        operationService.saveCardBlockOperation(request, Admin.class);
+        operationService.saveCardActivateOperation(request, Admin.class);
         
         AbstractCommand command = new AdminCardsListCommand();
         command.execute(request, response);

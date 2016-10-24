@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CardService {
 
-    private static final String CARD_ID_PARAMETER = "cardId";
     private final CardDAO cardDAO;
     
     public CardService(){
@@ -31,7 +30,7 @@ public class CardService {
     }
     
     private int getCardId(HttpServletRequest request){
-        String cardIdParameter = request.getParameter(CARD_ID_PARAMETER);
+        String cardIdParameter = request.getParameter(Parameter.CARD_ID.getParameter());
         int cardId = Integer.parseInt(cardIdParameter); 
         return cardId;
     }

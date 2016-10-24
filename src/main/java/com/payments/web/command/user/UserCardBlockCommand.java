@@ -1,6 +1,6 @@
-package com.payments.web.command.admin;
+package com.payments.web.command.user;
 
-import com.payments.entity.Admin;
+import com.payments.entity.User;
 import com.payments.logic.CardService;
 import com.payments.logic.OperationService;
 import com.payments.web.command.AbstractCommand;
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AdminCardsActivateCommand extends AbstractCommand {
+public class UserCardBlockCommand extends AbstractCommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {       
+    {    
         CardService cardService = new CardService();
-        cardService.activate(request);
+        cardService.block(request);
         
         OperationService operationService = new OperationService();
-        operationService.saveCardActivateOperation(request, Admin.class);
+        operationService.saveCardBlockOperation(request, User.class);
         
-        AbstractCommand command = new AdminCardsListCommand();
+        AbstractCommand command = new UserCardsListCommand();
         command.execute(request, response);
     }    
 }

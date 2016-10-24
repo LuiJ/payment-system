@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class User extends AbstractUser implements Identifiable {
+public class User extends AbstractUser {
     
     public static final String TABLE_NAME = "user";
     public static final String FIELD_FIRST_NAME = "first_name";

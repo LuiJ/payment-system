@@ -31,7 +31,7 @@ public class UserCardsListCommand extends AbstractCommand {
         int userId = user.getId();
         
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
-        List<Account> accounts = accountDAO.getAllByUserId(userId);
+        List<Account> accounts = accountDAO.getActiveAccountsByUserId(userId);
                 
         CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
         

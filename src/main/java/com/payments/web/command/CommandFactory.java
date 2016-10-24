@@ -3,16 +3,18 @@ package com.payments.web.command;
 import com.payments.web.command.admin.AdminLoginFailedCommand;
 import com.payments.web.command.admin.AdminLoginPageCommand;
 import com.payments.web.command.admin.AdminAccountsListCommand;
-import com.payments.web.command.admin.AdminCardsActivateCommand;
-import com.payments.web.command.admin.AdminCardsBlockCommand;
+import com.payments.web.command.admin.AdminCardActivateCommand;
+import com.payments.web.command.admin.AdminCardBlockCommand;
 import com.payments.web.command.admin.AdminCardsListCommand;
 import com.payments.web.command.admin.AdminOperationsListCommand;
+import com.payments.web.command.user.UserAccountCloseCommand;
 import com.payments.web.command.user.UserAccountsListCommand;
-import com.payments.web.command.user.UserCardsBlockCommand;
+import com.payments.web.command.user.UserCardBlockCommand;
 import com.payments.web.command.user.UserLoginPageCommand;
 import com.payments.web.command.user.UserCardsListCommand;
 import com.payments.web.command.user.UserLoginFailedCommand;
 import com.payments.web.command.user.UserOperationsListCommand;
+import com.payments.web.command.user.UserPaymentPageCommand;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -37,6 +39,8 @@ public class CommandFactory {
     private static final String USER_CARDS = "/user/cards";
     private static final String USER_CARD_BLOCK = "/user/card-block";
     private static final String USER_OPERATIONS = "/user/operations";
+    private static final String USER_ACCOUNT_CLOSE = "/user/account-close";
+    private static final String USER_PAYMENT = "/user/payment";
         
     private static final String HOME = "/";
     private static final String LOGIN = "/login";
@@ -104,6 +108,9 @@ public class CommandFactory {
                 break;
             case USER_OPERATIONS:
                 command = new UserOperationsListCommand();
+                break;                
+            case USER_PAYMENT:
+                command = new UserPaymentPageCommand();
                 break;
             default: 
                 command = new PageNotFoundCommand();
@@ -119,13 +126,16 @@ public class CommandFactory {
         
         switch (requestCommand){
             case ADMIN_CARD_BLOCK:
-                command = new AdminCardsBlockCommand();
+                command = new AdminCardBlockCommand();
                 break;                
             case ADMIN_CARD_ACTIVATE:
-                command = new AdminCardsActivateCommand();
+                command = new AdminCardActivateCommand();
                 break;
             case USER_CARD_BLOCK:
-                command = new UserCardsBlockCommand();
+                command = new UserCardBlockCommand();
+                break;
+            case USER_ACCOUNT_CLOSE:
+                command = new UserAccountCloseCommand();
                 break;
             default: 
                 command = new PageNotFoundCommand();

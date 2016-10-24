@@ -2,9 +2,8 @@
 
 <c:url var="homeUrl" value="/"></c:url>
 
-<div id="common-content">
-    <h1>404 - Page Not Found</h1>
-    <br/>
-    <br/>
-    <a href="${homeUrl}" class="btn center">Back to home page</a>
-</div>
+
+<h1>404 - Page Not Found</h1>
+<br/>
+<br/>
+<a href="${homeUrl}" class="btn center">Back to home page</a>

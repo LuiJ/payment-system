@@ -2,11 +2,10 @@
 
 <c:url var="userAccountsUrl" value="/user/accounts"></c:url>
 
-<div id="common-content">
-    <h1>Welcome to your Payment System</h1>
-    <br/>
-    <h3>Feel free to make payments and receive money</h3>
-    <br/>
-    <br/>
-    <a href="${userAccountsUrl}" class="btn center">Login</a>
-</div>
+
+<h1>Welcome to your Payment System</h1>
+<br/>
+<h3>Feel free to make payments and receive money</h3>
+<br/>
+<br/>
+<a href="${userAccountsUrl}" class="btn center">Login</a>

@@ -9,6 +9,7 @@ import com.payments.entity.User;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -22,7 +23,9 @@ public class OperationBuilder implements EntityBuilder {
         int id = operationResultSet.getInt(Operation.FIELD_ID);
         operation.setId(id);
         
-        Date date = operationResultSet.getDate(Operation.FIELD_DATE);
+        Timestamp timestamp = operationResultSet.getTimestamp(Operation.FIELD_DATE);
+        long time = timestamp.getTime();
+        Date date = new Date(time);
         operation.setDate(date);
         
         OperationType type = OperationType.valueOf(operationResultSet.getString(Operation.FIELD_TYPE));
