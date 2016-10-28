@@ -27,20 +27,6 @@ function separateCardNumber(){
 
 separateCardNumber();
 
-
-
-function handleNumberInput(input){
-    var inputValue = "" + $(input).val();
-    if (inputValue.length == 0){
-        return;
-    }
-    var lastChar = inputValue.charAt(inputValue.length - 1);
-    var digitsRegExp = new RegExp(/^\d+$/);
-    var isDigit = digitsRegExp.test(lastChar);
-    if (!isDigit || inputValue.length > 16){
-        var correctValue = inputValue.substr(0, inputValue.length - 1)
-        $(input).val(correctValue);
-    }
-}
-
+$(".number").mask('0000 0000 0000 0000');
+$(".amount").mask('#0.00', {reverse: true});
 

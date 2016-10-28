@@ -1,10 +1,8 @@
 package com.payments.web.command.admin;
 
 import com.payments.dao.AccountDAO;
-import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.entity.Account;
-import com.payments.entity.Card;
 import com.payments.web.command.AbstractCommand;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.View;
@@ -24,14 +22,7 @@ public class AdminAccountsListCommand extends AbstractCommand {
             throws ServletException, IOException
     {
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
-        CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
-        List<Account> accounts = accountDAO.getAll();
-        
-        for (Account account : accounts){
-            int accountId = account.getId();
-            List<Card> cards = cardDAO.getAllByAccountId(accountId);
-            account.setCards(cards);
-        }  
+        List<Account> accounts = accountDAO.getAllWithCards(); 
         
         request.setAttribute(Attribute.PAGE, PAGE);
         request.setAttribute(Attribute.ACCOUNTS, accounts);        

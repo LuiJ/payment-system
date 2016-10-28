@@ -25,16 +25,16 @@
     <div id="payment-part">
         <p id="amount-available">
             <b>Amount available:</b>&nbsp;
-            <span>1234.56</span>
+            <span></span>
         </p>
         <div class="input-wrap">
-            <input type="text" placeholder="Card or Account Nubmer" name="number" onkeyup="handleNumberInput(this);"/>             
+            <input type="text" placeholder="Card or Account Nubmer" name="number" class="number"/>             
         </div>
         <p class="note"><b>Note:</b> Enter Card or Account Nubmer for which you want to pay or transfer money</p>
         <div class="input-wrap">
-            <input type="text" placeholder="Amount of money" name="amount"/>             
+            <input type="text" placeholder="Amount of money" name="amount" class="amount"/>             
         </div>
-        <p class="note"><b>Note:</b> Amount of money you want to pay or transfer</p>
-        <input type="submit" name="submit" class="btn center" id="payment-form-btn" value="Go" /> 
+        <p class="note"><b>Note:</b> Amount of money you want to pay or transfer.</p>
+        <input type="submit" name="submit" class="btn center" id="payment-form-btn" value="Go"/> 
     </div>          
 </form>

@@ -10,6 +10,7 @@ public class Operation implements Identifiable {
     public static final String FIELD_ID = "id";
     public static final String FIELD_DATE = "date";
     public static final String FIELD_TYPE = "type";
+    public static final String FIELD_ITEM_NUMBER = "item_number";
     public static final String FIELD_AMOUNT = "amount";
     public static final String FIELD_DESCRIPTION = "description";
     public static final String FIELD_USER_ID = "user_id";
@@ -17,6 +18,7 @@ public class Operation implements Identifiable {
     private int id;
     private Date date;
     private OperationType type;
+    private long itemNumber;
     private BigDecimal amount;
     private String description;
     private int userId;
@@ -46,6 +48,14 @@ public class Operation implements Identifiable {
 
     public void setType(OperationType type) {
         this.type = type;
+    }
+
+    public long getItemNumber() {
+        return itemNumber;
+    }
+
+    public void setItemNumber(long itemNumber) {
+        this.itemNumber = itemNumber;
     }
 
     public BigDecimal getAmount() {

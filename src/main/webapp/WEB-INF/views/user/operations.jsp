@@ -9,20 +9,22 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>Operation</td>
                     <td>Date</td>
+                    <td>Operation</td>
                     <td>Description</td>
+                    <td>Number</td>
                     <td>Amount</td>
                 </tr>
             </thead>
             <tbody>                        
                 <c:forEach items="${operations}" var="operation">
                     <tr>
-                        <td>${operation.type}</td>
                         <td>
                             <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"  timeZone="Europe/Moscow" value="${operation.date}"/>
                         </td>
+                        <td>${operation.type}</td>
                         <td>${operation.description}</td>
+                        <td>${operation.itemNumber}</td>
                         <td>${operation.amount}</td>
                     </tr>
                 </c:forEach>                        

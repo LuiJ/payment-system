@@ -1,13 +1,14 @@
-package com.payments.logic;
+package com.payments.web.command;
 
 
-public enum Parameter {
+public enum RequestParameter {
+    
     CARD_ID("cardId"),
     ACCOUNT_ID("accountId");
     
     private final String parameter; 
     
-    Parameter(String parameter){
+    RequestParameter(String parameter){
         this.parameter = parameter;
     }
 

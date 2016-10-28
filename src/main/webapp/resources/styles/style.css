@@ -129,7 +129,7 @@
 }
 #payment-form {
     display: block;
-    width: 250px;
+    width: 300px;
 }
 .input-wrap, .select-wrap {
     width: 100%;
@@ -238,6 +238,7 @@
 }
 #payment-form-btn {
     width: 100%;
+    box-sizing: border-box;
 }
 #amount-available {
     width: 100%;

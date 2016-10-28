@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `operation` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
     `date` datetime  DEFAULT NULL,
     `type` ENUM('PAYMENT', 'RECEIVE_MONEY', 'CARD_BLOCKING', 'CARD_ACTIVATING', 'ACCOUNT_CLOSING'),
+    `item_number` bigint(16) DEFAULT NULL,
     `amount` decimal(15,2) DEFAULT NULL,
     `description` varchar(512) DEFAULT NULL,   
     `user_id` int(10) DEFAULT NULL,
@@ -119,7 +120,6 @@ INSERT INTO `card` (`id`, `number`, `pin_code`, `salt`, `status`, `account_id`) 
 (6, 6666777788889999, '4c3a9503975ca8b04827524959553837', 'd720aa09c95ff7dd7ccf', 'ACTIVE', 5);
 
 
-INSERT INTO `operation` (`id`, `date`, `type`, `amount`, `description`, `user_id`) VALUES
-(1, '2016-04-07 12:34:17', 'PAYMENT', 1234.56, 'payment 1', 1),
-(2, '2016-04-07 12:34:17', 'CARD_BLOCKING', 2345.67, 'payment 2', 2),
-(3, '2016-04-07 12:34:17', 'ACCOUNT_CLOSING', 3456.78, 'payment 3', 1); 
+INSERT INTO `operation` (`id`, `date`, `type`, `item_number`, `amount`, `description`, `user_id`) VALUES
+(1, '2016-04-07 12:34:17', 'CARD_BLOCKING', 1111222233334444, NULL, 'Card has been blocked', 1),
+(2, '2016-04-07 12:34:17', 'ACCOUNT_CLOSING', 9999888877776666, NULL, 'Account has been closed', 1); 

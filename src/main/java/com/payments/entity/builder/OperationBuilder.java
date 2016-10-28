@@ -31,6 +31,9 @@ public class OperationBuilder implements EntityBuilder {
         OperationType type = OperationType.valueOf(operationResultSet.getString(Operation.FIELD_TYPE));
         operation.setType(type);
         
+        long itemNumber = operationResultSet.getLong(Operation.FIELD_ITEM_NUMBER);
+        operation.setItemNumber(itemNumber);
+        
         BigDecimal amount = operationResultSet.getBigDecimal(Operation.FIELD_AMOUNT);
         operation.setAmount(amount);
         

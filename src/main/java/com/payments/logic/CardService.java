@@ -4,7 +4,6 @@ import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.entity.Card;
 import com.payments.entity.Status;
-import javax.servlet.http.HttpServletRequest;
 
 
 public class CardService {
@@ -15,24 +14,15 @@ public class CardService {
         cardDAO = DAOFactory.INSTANCE.getCardDAO();
     }
     
-    public void block(HttpServletRequest request){        
-        int cardId = getCardId(request);
+    public void block(int cardId){ 
         Card card = cardDAO.getById(cardId);
         card.setStatus(Status.BLOCKED);
         cardDAO.save(card);
     }
     
-    public void activate(HttpServletRequest request){
-        int cardId = getCardId(request);
+    public void activate(int cardId){
         Card card = cardDAO.getById(cardId);
         card.setStatus(Status.ACTIVE);
         cardDAO.save(card);
-    }
-    
-    private int getCardId(HttpServletRequest request){
-        String cardIdParameter = request.getParameter(Parameter.CARD_ID.getParameter());
-        int cardId = Integer.parseInt(cardIdParameter); 
-        return cardId;
-    }
-    
+    }    
 }

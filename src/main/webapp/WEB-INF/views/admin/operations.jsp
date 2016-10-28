@@ -9,9 +9,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>Operation</td>
                     <td>Date</td>
+                    <td>Operation</td>
                     <td>Description</td>
+                    <td>Number</td>
                     <td>Amount</td>
                     <td>User</td>
                 </tr>
@@ -19,11 +20,12 @@
             <tbody>                        
                 <c:forEach items="${operations}" var="operation">
                     <tr>
-                        <td>${operation.type}</td>
                         <td>
                             <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${operation.date}"/>
                         </td>
+                        <td>${operation.type}</td>
                         <td>${operation.description}</td>
+                        <td>${operation.itemNumber}</td>
                         <td>${operation.amount}</td>
                         <td>${operation.user.lastName}, ${operation.user.firstName}</td>
                     </tr>

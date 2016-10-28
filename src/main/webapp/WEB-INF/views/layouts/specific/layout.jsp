@@ -3,6 +3,7 @@
 
 <c:url var="cssUrl" value="/resources/styles/style.css"></c:url>
 <c:url var="jqueryUrl" value="/resources/js/jquery.js"></c:url>
+<c:url var="jqueryMaskUrl" value="/resources/js/jquery.mask.js"></c:url>
 <c:url var="jsUrl" value="/resources/js/script.js"></c:url>
 
 
@@ -13,6 +14,7 @@
         </title>
         <link rel="stylesheet" href="${cssUrl}" type="text/css" />
         <script src="${jqueryUrl}"></script>
+        <script src="${jqueryMaskUrl}"></script>
     </head>
     
     <body>

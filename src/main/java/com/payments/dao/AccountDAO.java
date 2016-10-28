@@ -1,6 +1,7 @@
 package com.payments.dao;
 
 import com.payments.entity.Account;
+import com.payments.entity.Card;
 import com.payments.entity.Status;
 import java.util.List;
 import java.util.Properties;
@@ -25,6 +26,17 @@ public class AccountDAO extends AbstractDAO<Account> {
         Properties conditions = new Properties();
         conditions.put(Account.FIELD_STATUS, Status.ACTIVE.name());
         List<Account> accounts = getAllByConditions(conditions);
+        return accounts;
+    }
+    
+    public List<Account> getAllWithCards(){
+        CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
+        List<Account> accounts = getAll();
+        for (Account account : accounts){
+            int accountId = account.getId();
+            List<Card> cards = cardDAO.getAllByAccountId(accountId);
+            account.setCards(cards);
+        }
         return accounts;
     }
     
