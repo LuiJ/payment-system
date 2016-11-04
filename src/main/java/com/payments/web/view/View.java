@@ -16,6 +16,7 @@ public enum View {
     USER_ACCOUNTS("user_accounts"),
     USER_CARDS("user_cards"),
     USER_PAYMENT("user_payment"),
+    USER_PAYMENT_ERROR("user_payment_error"),
     USER_OPERATIONS("user_operations");
         
     private final String viewName;

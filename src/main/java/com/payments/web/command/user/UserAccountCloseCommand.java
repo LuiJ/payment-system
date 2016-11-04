@@ -1,5 +1,6 @@
 package com.payments.web.command.user;
 
+import com.payments.exception.PaymentsException;
 import com.payments.logic.AccountService;
 import com.payments.logic.OperationService;
 import com.payments.web.command.AbstractCommand;
@@ -14,7 +15,7 @@ public class UserAccountCloseCommand extends AbstractCommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException
+            throws ServletException, IOException, PaymentsException
     {   
         String accountIdParameter = request.getParameter(RequestParameter.ACCOUNT_ID.getParameter());
         int accountId = Integer.parseInt(accountIdParameter);         

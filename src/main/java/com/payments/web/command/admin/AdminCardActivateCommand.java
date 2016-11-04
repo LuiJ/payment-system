@@ -1,5 +1,6 @@
 package com.payments.web.command.admin;
 
+import com.payments.exception.PaymentsException;
 import com.payments.logic.CardService;
 import com.payments.logic.OperationService;
 import com.payments.web.command.AbstractCommand;
@@ -14,7 +15,7 @@ public class AdminCardActivateCommand extends AbstractCommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException
+            throws ServletException, IOException, PaymentsException
     {    
         String cardIdParameter = request.getParameter(RequestParameter.CARD_ID.getParameter());
         int cardId = Integer.parseInt(cardIdParameter);

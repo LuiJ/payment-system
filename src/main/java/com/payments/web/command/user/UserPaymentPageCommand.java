@@ -28,7 +28,7 @@ public class UserPaymentPageCommand extends AbstractCommand {
         int userId = user.getId();
                 
         CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();        
-        List<Card> cards = cardDAO.getAllByUserId(userId); 
+        List<Card> cards = cardDAO.getAllActiveByUserId(userId); 
         
         request.setAttribute(Attribute.PAGE, PAGE);        
         request.setAttribute(Attribute.CARDS, cards);

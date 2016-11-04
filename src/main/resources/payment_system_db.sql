@@ -93,22 +93,22 @@ INSERT INTO `role` (`id`, `role_name`) VALUES
 
 
 INSERT INTO `admin` (`id`, `login`, `password`, `role_id`, `first_name`) VALUES
-(1, 'admin1', 'pwd1', 1, 'Aliaksei'),
-(2, 'admin2', 'pwd2', 1, 'Filipp');
+(1, 'admin1', 'pwd1', 1, 'Алексей'),
+(2, 'admin2', 'pwd2', 1, 'Филипп');
 
 
 INSERT INTO `user` (`id`, `login`, `password`, `role_id`, `first_name`, `last_name`) VALUES
-(1, 'user1', 'pwd1', 2, 'Ivan', 'Sidorov'),
-(2, 'user2', 'pwd2', 2, 'Semen', 'Smirnov'),
-(3, 'user3', 'pwd3', 2, 'Viktor', 'Ivanov');
+(1, 'user1', 'pwd1', 2, 'Иван', 'Сидоров'),
+(2, 'user2', 'pwd2', 2, 'Семен', 'Смирнов'),
+(3, 'user3', 'pwd3', 2, 'Виктор', 'Иванов');
 
 
 INSERT INTO `account` (`id`, `number`, `status`, `amount`, `user_id`) VALUES
-(1, 9999888877776666, 'ACTIVE', 1234.56, 1),
-(2, 8888777766665555, 'ACTIVE', 2345.67, 1),
-(3, 7777666655554444, 'ACTIVE', 3456.78, 2),
-(4, 6666555544443333, 'ACTIVE', 4567.89, 2),
-(5, 5555444433332222, 'ACTIVE', 5678.90, 3);
+(1, 9999888877776666, 'ACTIVE', 5000, 1),
+(2, 8888777766665555, 'ACTIVE', 5000, 1),
+(3, 7777666655554444, 'ACTIVE', 5000, 2),
+(4, 6666555544443333, 'ACTIVE', 5000, 2),
+(5, 5555444433332222, 'ACTIVE', 5000, 3);
 
 
 INSERT INTO `card` (`id`, `number`, `pin_code`, `salt`, `status`, `account_id`) VALUES

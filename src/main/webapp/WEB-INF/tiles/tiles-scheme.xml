@@ -72,6 +72,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/user/payment.jsp" />
 	</definition>
         
+        <definition name="user_payment_error" extends="specific">
+                <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/user/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/user/payment_error.jsp" />
+	</definition>
+        
         <definition name="user_operations" extends="specific">
                 <put-attribute name="menu" value="/WEB-INF/views/layouts/specific/user/menu.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/user/operations.jsp" />

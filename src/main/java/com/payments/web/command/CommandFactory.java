@@ -14,6 +14,7 @@ import com.payments.web.command.user.UserLoginPageCommand;
 import com.payments.web.command.user.UserCardsListCommand;
 import com.payments.web.command.user.UserLoginFailedCommand;
 import com.payments.web.command.user.UserOperationsListCommand;
+import com.payments.web.command.user.UserPaymentCommand;
 import com.payments.web.command.user.UserPaymentPageCommand;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -136,6 +137,9 @@ public class CommandFactory {
                 break;
             case USER_ACCOUNT_CLOSE:
                 command = new UserAccountCloseCommand();
+                break;
+            case USER_PAYMENT:
+                command = new UserPaymentCommand();
                 break;
             default: 
                 command = new PageNotFoundCommand();

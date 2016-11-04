@@ -9,6 +9,7 @@ import com.payments.entity.Account;
 import com.payments.entity.Card;
 import com.payments.entity.Operation;
 import com.payments.entity.OperationType;
+import com.payments.entity.Payment;
 import com.payments.entity.User;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -86,7 +87,45 @@ public class OperationService {
         operation.setUserId(userId);
         
         operationDAO.save(operation);
-    }    
+    } 
+   
+    
+    public void savePaymentOperation(Payment payment)
+    {
+        Operation payerOperation = createOperation();        
+        payerOperation.setType(OperationType.PAYMENT);
+        
+        String paymentDescription = OperationType.PAYMENT.getDescription();
+        payerOperation.setDescription(paymentDescription);
+        
+        Account payerAccount = payment.getPayerAccount();
+        long payerAccountNumber = payerAccount.getNumber();
+        payerOperation.setItemNumber(payerAccountNumber);
+        
+        BigDecimal amount = payment.getAmount();
+        payerOperation.setAmount(amount);
+        
+        int payerId = payerAccount.getUserId();
+        payerOperation.setUserId(payerId);
+        
+        operationDAO.save(payerOperation);
+        
+        Operation receiverOperation = createOperation();        
+        receiverOperation.setType(OperationType.RECEIVE_MONEY);
+        
+        String receiveDescription = OperationType.RECEIVE_MONEY.getDescription();
+        receiverOperation.setDescription(receiveDescription);
+        
+        Account targetAccount = payment.getTargetAccount();
+        long targetAccountNumber = targetAccount.getNumber();
+        receiverOperation.setItemNumber(targetAccountNumber);
+        receiverOperation.setAmount(amount);
+        
+        int paymentReceiverId = targetAccount.getUserId();
+        receiverOperation.setUserId(paymentReceiverId);
+        
+        operationDAO.save(receiverOperation);
+    }
     
     
     private Operation createOperation(){

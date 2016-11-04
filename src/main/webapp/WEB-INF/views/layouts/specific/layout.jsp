@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <c:url var="cssUrl" value="/resources/styles/style.css"></c:url>
 <c:url var="jqueryUrl" value="/resources/js/jquery.js"></c:url>
 <c:url var="jqueryMaskUrl" value="/resources/js/jquery.mask.js"></c:url>

@@ -4,10 +4,14 @@ import com.payments.dao.AdminDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.dao.UserDAO;
 import com.payments.entity.AbstractUser;
+import com.payments.exception.IncorrectPaymentDataException;
+import com.payments.exception.PaymentAmountException;
+import com.payments.exception.PaymentsException;
 import com.payments.web.command.Command;
 import com.payments.web.command.CommandFactory;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.Renderer;
+import com.payments.web.view.View;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +36,23 @@ public class MainServlet extends HttpServlet {
     {     
         keepUserInSession(request);
         
-        Command command = CommandFactory.create(request);
-        command.execute(request, response); 
+        try {
+            Command command = CommandFactory.create(request);
+            command.execute(request, response); 
+        }
+        catch (IncorrectPaymentDataException e){
+            request.setAttribute(Attribute.ERROR_MESSAGE, "Incorrect payment data");
+            View view = e.getViewToRender();
+            renderer.render(request, response, view);            
+        } 
+        catch (PaymentAmountException e){
+            request.setAttribute(Attribute.ERROR_MESSAGE, "Payment amount exceeds available amount");
+            View view = e.getViewToRender();
+            renderer.render(request, response, view);            
+        } 
+        catch (PaymentsException e){
+            throw new IllegalStateException();
+        }
     }
     
     

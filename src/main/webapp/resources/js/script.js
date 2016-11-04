@@ -2,16 +2,19 @@ $('input[type="submit"], a').click(function(){
     $("#preloader").show();
 });
 
-$("#chose-card").unbind().change(function(){
-    var amountAvailable = $(this).val();
+function chooseCard(obj){
+    var amountAvailable = $(obj).find("option:selected")
+                                .attr("data-available-amount");
     if (amountAvailable > 0){
         $("#amount-available span").html(amountAvailable);
+        $('#payment-part input[type="text"]').val("");
         $("#payment-part").show();
     }
     else {
         $("#payment-part").hide();
     }
-});
+    $(".success-msg").hide();
+}
 
 function separateCardNumber(){
     var blocksWithCardNumber = $(".cand-number");
@@ -27,6 +30,15 @@ function separateCardNumber(){
 
 separateCardNumber();
 
-$(".number").mask('0000 0000 0000 0000');
-$(".amount").mask('#0.00', {reverse: true});
+function sendPaymentForm(obj){
+    var accountId = $('select[name="accountId"]').val();
+    var amount = $('input[name="amount"]').val();
+    var number = "" + $('input[name="number"]').val();
+    var trimmedNumber = number.replace(/\s/g,'');
+    if (amount != "" && accountId > 0 && 
+        trimmedNumber != "" && trimmedNumber.length == 16)
+    {
+        $(obj).siblings('input[type="submit"]').click();
+    }
+}
 

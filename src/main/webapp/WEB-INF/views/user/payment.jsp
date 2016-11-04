@@ -13,11 +13,11 @@
     </c:if>
     
     <div class="select-wrap">
-        <select id="chose-card">
+        <select id="chose-card" name="accountId" onchange="chooseCard(this);">
             <option value="0">Chose the card</option>
             <c:if test="${not empty cards}">
                 <c:forEach items="${cards}" var="card">
-                    <option value="${card.account.amount}" class="cand-number">${card.number}</option>
+                    <option class="cand-number" data-available-amount="${card.account.amount}" value="${card.accountId}">${card.number}</option>
                 </c:forEach>
             </c:if>
         </select>
@@ -35,6 +35,21 @@
             <input type="text" placeholder="Amount of money" name="amount" class="amount"/>             
         </div>
         <p class="note"><b>Note:</b> Amount of money you want to pay or transfer.</p>
-        <input type="submit" name="submit" class="btn center" id="payment-form-btn" value="Go"/> 
+        <input type="submit" name="submit" value="1" class="hidden"/> 
+        <div class="btn center" id="payment-form-btn" onclick="sendPaymentForm(this);">Go</div>
     </div>          
 </form>
+   
+    
+<script type="text/javascript">
+    
+    $(".number").mask('0000 0000 0000 0000');
+    $(".amount").mask('#0.00', {reverse: true});
+    
+    $(document).keypress(function(e) {
+        if(e.which == 13) {
+            sendPaymentForm($("#payment-form-btn"));
+            return false;
+        }
+    });
+</script>

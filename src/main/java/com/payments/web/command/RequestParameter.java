@@ -4,7 +4,9 @@ package com.payments.web.command;
 public enum RequestParameter {
     
     CARD_ID("cardId"),
-    ACCOUNT_ID("accountId");
+    ACCOUNT_ID("accountId"),
+    NUMBER("number"),
+    AMOUNT("amount");
     
     private final String parameter; 
     
