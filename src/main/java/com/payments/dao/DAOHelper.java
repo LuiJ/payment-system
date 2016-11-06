@@ -85,7 +85,7 @@ public class DAOHelper <T extends Identifiable> {
     // ------------------------------------------------------------------------
     
     
-    public String getTableName(){
+    private String getTableName(){
         String tableName = null;
         try {
             tableName = (String) type.getField("TABLE_NAME").get(null);            
@@ -98,7 +98,7 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    public String createInsertQuery(T entity){
+    private String createInsertQuery(T entity){
         String tableName = getTableName();
         String paramsSpliter = ", ";
         String queryParams = entityParamsAndValuesToString(entity, paramsSpliter, ResultTypeEnum.PARAMS);
@@ -109,7 +109,7 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    public String createUpdateQuery(T entity){
+    private String createUpdateQuery(T entity){
         String tableName = getTableName();
         int entityId = entity.getId();
         String paramsSpliter = ", ";
@@ -180,7 +180,7 @@ public class DAOHelper <T extends Identifiable> {
     }
     
     
-    public String propertiesToString(Properties conditions, String splitWith){
+    private String propertiesToString(Properties conditions, String splitWith){
         List<String> queryParams = new ArrayList<>();
         Enumeration<Object> keys = conditions.keys();
         while (keys.hasMoreElements()){
