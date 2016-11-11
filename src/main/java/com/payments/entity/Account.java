@@ -92,27 +92,5 @@ public class Account implements Identifiable {
                       + "Status: " + status + "\n" 
                       + "Amount: " + amount + "\n";
         return result;
-    }
-    
-    @Override
-    public int hashCode(){
-        int result = (int)(number ^ (number >>> 32));
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Account other = (Account) obj;
-        if (this.number != other.number) {
-            return false;
-        }
-        return true;
-    }
-        
+    }    
 }

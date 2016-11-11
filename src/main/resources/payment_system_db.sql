@@ -58,12 +58,14 @@ CREATE TABLE IF NOT EXISTS `operation` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
     `date` datetime  DEFAULT NULL,
     `type` ENUM('PAYMENT', 'RECEIVE_MONEY', 'CARD_BLOCKING', 'CARD_ACTIVATING', 'ACCOUNT_CLOSING'),
-    `item_number` bigint(16) DEFAULT NULL,
-    `amount` decimal(15,2) DEFAULT NULL,
-    `description` varchar(512) DEFAULT NULL,   
+    `amount` decimal(15,2) DEFAULT NULL, 
     `user_id` int(10) DEFAULT NULL,
+    `account_id` int(10) DEFAULT NULL,
+    `card_id` int(10) DEFAULT NULL,
     PRIMARY KEY (`id`),
-    KEY `user_id` (`user_id`)
+    KEY `user_id` (`user_id`),
+    KEY `account_id` (`account_id`),
+    KEY `card_id` (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -80,7 +82,9 @@ ALTER TABLE `account`
 
 
 ALTER TABLE `operation`
-  ADD CONSTRAINT `operation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `operation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `operation_ibfk_2` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `operation_ibfk_3` FOREIGN KEY (`card_id`) REFERENCES `card` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 
 ALTER TABLE `card`
@@ -120,6 +124,6 @@ INSERT INTO `card` (`id`, `number`, `pin_code`, `salt`, `status`, `account_id`) 
 (6, 6666777788889999, '4c3a9503975ca8b04827524959553837', 'd720aa09c95ff7dd7ccf', 'ACTIVE', 5);
 
 
-INSERT INTO `operation` (`id`, `date`, `type`, `item_number`, `amount`, `description`, `user_id`) VALUES
-(1, '2016-04-07 12:34:17', 'CARD_BLOCKING', 1111222233334444, NULL, 'Card has been blocked', 1),
-(2, '2016-04-07 12:34:17', 'ACCOUNT_CLOSING', 9999888877776666, NULL, 'Account has been closed', 1); 
+INSERT INTO `operation` (`id`, `date`, `type`, `amount`, `user_id`, `account_id`, `card_id`) VALUES
+(1, '2016-04-07 12:34:17', 'CARD_BLOCKING', NULL, 1, NULL, NULL),
+(2, '2016-04-07 12:34:17', 'ACCOUNT_CLOSING', NULL, 1, NULL, NULL); 

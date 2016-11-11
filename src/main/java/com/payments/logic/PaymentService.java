@@ -55,7 +55,13 @@ public class PaymentService {
         }
         
         Account targetAccount = getAccountByTargetNumber(targetNumber);
-        if (targetAccount == null || payerAccount.equals(targetAccount)){
+        if (targetAccount == null){
+            throw new IncorrectPaymentDataException(View.USER_PAYMENT_ERROR);
+        }
+        
+        int targetAccountId = targetAccount.getId();
+        int payerAccountId = payerAccount.getId();
+        if (targetAccountId == payerAccountId){
             throw new IncorrectPaymentDataException(View.USER_PAYMENT_ERROR);
         }
         

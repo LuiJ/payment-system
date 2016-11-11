@@ -10,19 +10,21 @@ public class Operation implements Identifiable {
     public static final String FIELD_ID = "id";
     public static final String FIELD_DATE = "date";
     public static final String FIELD_TYPE = "type";
-    public static final String FIELD_ITEM_NUMBER = "item_number";
     public static final String FIELD_AMOUNT = "amount";
-    public static final String FIELD_DESCRIPTION = "description";
     public static final String FIELD_USER_ID = "user_id";
+    public static final String FIELD_ACCOUNT_ID = "account_id";
+    public static final String FIELD_CARD_ID = "card_id";
 
     private int id;
     private Date date;
     private OperationType type;
-    private long itemNumber;
     private BigDecimal amount;
-    private String description;
     private int userId;
     private User user;
+    private int accountId;
+    private Account account;
+    private int cardId;
+    private Card card;
 
     @Override
     public int getId() {
@@ -50,28 +52,12 @@ public class Operation implements Identifiable {
         this.type = type;
     }
 
-    public long getItemNumber() {
-        return itemNumber;
-    }
-
-    public void setItemNumber(long itemNumber) {
-        this.itemNumber = itemNumber;
-    }
-
     public BigDecimal getAmount() {
         return amount;
     }
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getUserId() {
@@ -89,6 +75,38 @@ public class Operation implements Identifiable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public int getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
     
     @Override
     public String toString(){
@@ -96,8 +114,7 @@ public class Operation implements Identifiable {
                       + "\n--------------------\n" 
                       + "Date: " + date + "\n" 
                       + "Type: " + type + "\n" 
-                      + "Amount: " + amount + "\n"
-                      + "Description: " + description + "\n";
+                      + "Amount: " + amount + "\n";
         return result;
     }
 }

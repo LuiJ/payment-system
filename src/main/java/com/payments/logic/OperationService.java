@@ -1,12 +1,10 @@
 package com.payments.logic;
 
 import com.payments.dao.AccountDAO;
-import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.dao.OperationDAO;
 import com.payments.dao.UserDAO;
 import com.payments.entity.Account;
-import com.payments.entity.Card;
 import com.payments.entity.Operation;
 import com.payments.entity.OperationType;
 import com.payments.entity.Payment;
@@ -28,14 +26,7 @@ public class OperationService {
     {
         Operation operation = createOperation();        
         operation.setType(OperationType.CARD_BLOCKING);
-        String description = OperationType.CARD_BLOCKING.getDescription();
-        operation.setDescription(description);
-        
-        CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
-        Card card = cardDAO.getById(cardId);
-        long itemNumber = card.getNumber();
-        operation.setItemNumber(itemNumber);
-        
+        operation.setCardId(cardId);
         operation.setAmount(BigDecimal.ZERO);  
         
         UserDAO userDAO = DAOFactory.INSTANCE.getUserDAO();
@@ -51,14 +42,7 @@ public class OperationService {
     {
         Operation operation = createOperation();        
         operation.setType(OperationType.CARD_ACTIVATING);
-        String description = OperationType.CARD_ACTIVATING.getDescription();
-        operation.setDescription(description);
-        
-        CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
-        Card card = cardDAO.getById(cardId);
-        long itemNumber = card.getNumber();
-        operation.setItemNumber(itemNumber);
-        
+        operation.setCardId(cardId);        
         operation.setAmount(BigDecimal.ZERO);  
         
         UserDAO userDAO = DAOFactory.INSTANCE.getUserDAO();
@@ -74,15 +58,11 @@ public class OperationService {
     {
         Operation operation = createOperation();        
         operation.setType(OperationType.ACCOUNT_CLOSING);
-        String description = OperationType.ACCOUNT_CLOSING.getDescription();
-        operation.setDescription(description);
+        operation.setAccountId(accountId);
+        operation.setAmount(BigDecimal.ZERO); 
         
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
         Account account = accountDAO.getById(accountId);
-        long itemNumber = account.getNumber();
-        operation.setItemNumber(itemNumber);
-        
-        operation.setAmount(BigDecimal.ZERO);         
         int userId = account.getUserId();
         operation.setUserId(userId);
         
@@ -95,12 +75,9 @@ public class OperationService {
         Operation payerOperation = createOperation();        
         payerOperation.setType(OperationType.PAYMENT);
         
-        String paymentDescription = OperationType.PAYMENT.getDescription();
-        payerOperation.setDescription(paymentDescription);
-        
         Account payerAccount = payment.getPayerAccount();
-        long payerAccountNumber = payerAccount.getNumber();
-        payerOperation.setItemNumber(payerAccountNumber);
+        int payerAccountId = payerAccount.getId();
+        payerOperation.setAccountId(payerAccountId);
         
         BigDecimal amount = payment.getAmount();
         payerOperation.setAmount(amount);
@@ -113,12 +90,10 @@ public class OperationService {
         Operation receiverOperation = createOperation();        
         receiverOperation.setType(OperationType.RECEIVE_MONEY);
         
-        String receiveDescription = OperationType.RECEIVE_MONEY.getDescription();
-        receiverOperation.setDescription(receiveDescription);
-        
         Account targetAccount = payment.getTargetAccount();
-        long targetAccountNumber = targetAccount.getNumber();
-        receiverOperation.setItemNumber(targetAccountNumber);
+        int targetAccountId = targetAccount.getId();
+        receiverOperation.setAccountId(targetAccountId);
+        
         receiverOperation.setAmount(amount);
         
         int paymentReceiverId = targetAccount.getUserId();

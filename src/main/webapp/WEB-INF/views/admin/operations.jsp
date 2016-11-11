@@ -24,8 +24,15 @@
                             <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${operation.date}"/>
                         </td>
                         <td>${operation.type}</td>
-                        <td>${operation.description}</td>
-                        <td>${operation.itemNumber}</td>
+                        <td>${operation.type.description}</td>
+                        <td>
+                            <c:if test="${not empty operation.account}">
+                                ${operation.account.number}
+                            </c:if>
+                            <c:if test="${not empty operation.card}">
+                                ${operation.card.number}
+                            </c:if>
+                        </td>
                         <td>${operation.amount}</td>
                         <td>${operation.user.lastName}, ${operation.user.firstName}</td>
                     </tr>
