@@ -190,6 +190,7 @@ public class CommandFactory {
         String urlRoot = request.getContextPath();
         String uri = request.getRequestURI();
         String commandString = uri.split(urlRoot)[1];
+        commandString = removeJSessionId(commandString);
         commandString = removeLastSlash(commandString);
         return commandString;
     }
@@ -203,6 +204,16 @@ public class CommandFactory {
         String savedRequestCommand = requestedUrl.split(urlRoot)[1];
         String userType = savedRequestCommand.split("/")[1];
         return userType;
+    }
+    
+    
+    private static String removeJSessionId(String value) {
+        String jsessionParam = ";jsessionid";
+        String result = value;
+        if (value.contains(jsessionParam)){
+            result = value.split(jsessionParam)[0];
+        }
+        return result;
     }
     
     
