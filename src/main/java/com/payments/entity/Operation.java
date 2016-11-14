@@ -15,24 +15,24 @@ public class Operation implements Identifiable {
     public static final String FIELD_ACCOUNT_ID = "account_id";
     public static final String FIELD_CARD_ID = "card_id";
 
-    private int id;
+    private Integer id;
     private Date date;
     private OperationType type;
     private BigDecimal amount;
-    private int userId;
+    private Integer userId;
     private User user;
-    private int accountId;
+    private Integer accountId;
     private Account account;
-    private int cardId;
+    private Integer cardId;
     private Card card;
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,11 +60,11 @@ public class Operation implements Identifiable {
         this.amount = amount;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }    
 
@@ -76,11 +76,11 @@ public class Operation implements Identifiable {
         this.user = user;
     }
 
-    public int getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
@@ -92,11 +92,11 @@ public class Operation implements Identifiable {
         this.account = account;
     }
 
-    public int getCardId() {
+    public Integer getCardId() {
         return cardId;
     }
 
-    public void setCardId(int cardId) {
+    public void setCardId(Integer cardId) {
         this.cardId = cardId;
     }
 

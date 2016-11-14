@@ -67,9 +67,9 @@ public class DAOHelper <T extends Identifiable> {
 
     public int save(T entity) {
         int savedEntityId = 0; 
-        int id = entity.getId(); 
+        Integer id = entity.getId(); 
         String saveQuery = null;       
-        if (id == 0){
+        if (id == null){
             saveQuery = createInsertQuery(entity);
             savedEntityId = dbHelper.executeUpdateQuery(saveQuery).get(0);
         }
@@ -150,29 +150,36 @@ public class DAOHelper <T extends Identifiable> {
                     }
                     else {
                         fieldValue = String.valueOf(result);
+                
+                        if (!fieldValue.equalsIgnoreCase("null") && 
+                            !fieldValue.equalsIgnoreCase("0"))
+                        {
+                            fieldValue = "'" + fieldValue + "'";
+                        }
+                        else {
+                            fieldValue = "NULL";
+                        }
                     }                    
                 }
                 catch (IllegalAccessException | InvocationTargetException | ClassCastException e){
                     logger.error(e.getMessage(), e);
                     throw new IllegalStateException(e.getMessage());
-                }
+                } 
                 
-                if (!fieldValue.equalsIgnoreCase("0") && fieldValue != null){
-                    if (resultType == ResultTypeEnum.PARAMS_AND_VALUES){
-                        queryParams.add(fieldName + "='" + fieldValue + "'");
-                    }
-                    else if (resultType == ResultTypeEnum.PARAMS){
-                        queryParams.add(fieldName);
-                    }
-                    else if (resultType == ResultTypeEnum.VALUES){
-                        queryParams.add("'" + fieldValue + "'");
-                    }
-                    else {
-                        throw new IllegalArgumentException("'" + resultType 
-                            + "' is incorrect resultType for method " 
-                            + "'entityParamsAndValuesToString'");
-                    }                    
-                }                 
+                if (resultType == ResultTypeEnum.PARAMS_AND_VALUES){
+                    queryParams.add(fieldName + "=" + fieldValue);
+                }
+                else if (resultType == ResultTypeEnum.PARAMS){
+                    queryParams.add(fieldName);
+                }
+                else if (resultType == ResultTypeEnum.VALUES){
+                    queryParams.add(fieldValue);
+                }
+                else {
+                    throw new IllegalArgumentException("'" + resultType 
+                        + "' is incorrect resultType for method " 
+                        + "'entityParamsAndValuesToString'");
+                }
             }
         }          
         String result = StringUtils.join(queryParams, splitWith);

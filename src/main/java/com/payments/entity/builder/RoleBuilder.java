@@ -13,7 +13,7 @@ public class RoleBuilder implements EntityBuilder {
         
         Role role = new Role();
         
-        int id = roleResultSet.getInt(Role.FIELD_ID);
+        Integer id = (Integer) roleResultSet.getObject(Role.FIELD_ID);
         role.setId(id);
         
         String roleName = roleResultSet.getString(Role.FIELD_ROLE_NAME);

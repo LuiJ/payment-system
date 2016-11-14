@@ -24,7 +24,7 @@ public class OperationBuilder implements EntityBuilder {
     
         Operation operation = new Operation();
         
-        int id = operationResultSet.getInt(Operation.FIELD_ID);
+        Integer id = (Integer) operationResultSet.getObject(Operation.FIELD_ID);
         operation.setId(id);
         
         Timestamp timestamp = operationResultSet.getTimestamp(Operation.FIELD_DATE);
@@ -38,26 +38,24 @@ public class OperationBuilder implements EntityBuilder {
         BigDecimal amount = operationResultSet.getBigDecimal(Operation.FIELD_AMOUNT);
         operation.setAmount(amount);
         
-        int userId = operationResultSet.getInt(Operation.FIELD_USER_ID);
+        Integer userId = operationResultSet.getInt(Operation.FIELD_USER_ID);
         operation.setUserId(userId);
         
         UserDAO userDAO = DAOFactory.INSTANCE.getUserDAO();
         User user = userDAO.getById(userId);
         operation.setUser(user);
         
-        int accountId = operationResultSet.getInt(Operation.FIELD_ACCOUNT_ID);
-        operation.setAccountId(accountId);
-        
-        if (accountId != 0){
+        Integer accountId = (Integer) operationResultSet.getObject(Operation.FIELD_ACCOUNT_ID);        
+        if (accountId != null){
+            operation.setAccountId(accountId);
             AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
             Account account = accountDAO.getById(accountId);
             operation.setAccount(account);
         }       
         
-        int cardId = operationResultSet.getInt(Operation.FIELD_CARD_ID);
-        operation.setCardId(cardId);
-        
-        if (cardId != 0){
+        Integer cardId = (Integer) operationResultSet.getObject(Operation.FIELD_CARD_ID);        
+        if (cardId != null){
+            operation.setCardId(cardId);
             CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();
             Card card = cardDAO.getById(cardId);
             operation.setCard(card);

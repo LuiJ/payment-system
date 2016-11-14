@@ -17,7 +17,7 @@ public class CardBuilder implements EntityBuilder {
     
         Card card = new Card();
         
-        int id = cardResultSet.getInt(Card.FIELD_ID);
+        Integer id = (Integer) cardResultSet.getObject(Card.FIELD_ID);
         card.setId(id);
         
         long number = cardResultSet.getLong(Card.FIELD_NUMBER);
@@ -32,7 +32,7 @@ public class CardBuilder implements EntityBuilder {
         Status status = Status.valueOf(cardResultSet.getString(Card.FIELD_STATUS));
         card.setStatus(status);
         
-        int accountId = cardResultSet.getInt(Card.FIELD_ACCOUNT_ID);
+        Integer accountId = (Integer) cardResultSet.getObject(Card.FIELD_ACCOUNT_ID);
         card.setAccountId(accountId);
         
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();

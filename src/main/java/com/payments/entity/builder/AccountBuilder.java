@@ -18,7 +18,7 @@ public class AccountBuilder implements EntityBuilder {
         
         Account account = new Account();
         
-        int id = accountResultSet.getInt(Account.FIELD_ID);
+        Integer id = (Integer) accountResultSet.getObject(Account.FIELD_ID);
         account.setId(id);
         
         long number = accountResultSet.getLong(Account.FIELD_NUMBER);
@@ -30,7 +30,7 @@ public class AccountBuilder implements EntityBuilder {
         BigDecimal amount = accountResultSet.getBigDecimal(Account.FIELD_AMOUNT);
         account.setAmount(amount);
         
-        int userId = accountResultSet.getInt(Account.FIELD_USER_ID);
+        Integer userId = (Integer) accountResultSet.getObject(Account.FIELD_USER_ID);
         account.setUserId(userId);
         
         UserDAO userDAO = DAOFactory.INSTANCE.getUserDAO();

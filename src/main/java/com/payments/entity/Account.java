@@ -14,11 +14,11 @@ public class Account implements Identifiable {
     public static final String FIELD_AMOUNT = "amount";
     public static final String FIELD_USER_ID = "user_id";
             
-    private int id;
+    private Integer id;
     private long number;
     private Status status;
     private BigDecimal amount;
-    private int userId;
+    private Integer userId;
     private User user;
     private List<Card> cards;
     
@@ -27,12 +27,12 @@ public class Account implements Identifiable {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,11 +60,11 @@ public class Account implements Identifiable {
         this.amount = amount;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

@@ -13,21 +13,21 @@ public class AbstractUser implements Identifiable, UserDetails {
     public static final String FIELD_PASSWORD = "password";
     public static final String FIELD_ROLE_ID = "role_id";
 
-    private int id;
+    private Integer id;
     private String login;
     private String password;
-    private int roleId;
+    private Integer roleId;
     private Role role;
     
     public AbstractUser(){}
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     
@@ -53,11 +53,11 @@ public class AbstractUser implements Identifiable, UserDetails {
         this.password = password;
     }
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 

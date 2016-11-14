@@ -16,7 +16,7 @@ public abstract class AbstractUserBuilder  implements EntityBuilder {
         
         AbstractUser abstractUser = createSpecificUser();
         
-        int id = userResultSet.getInt(AbstractUser.FIELD_ID);
+        Integer id = (Integer) userResultSet.getObject(AbstractUser.FIELD_ID);
         abstractUser.setId(id);
         
         String login = userResultSet.getString(AbstractUser.FIELD_LOGIN);
@@ -25,7 +25,7 @@ public abstract class AbstractUserBuilder  implements EntityBuilder {
         String password = userResultSet.getString(AbstractUser.FIELD_PASSWORD);
         abstractUser.setPassword(password);
         
-        int roleId = userResultSet.getInt(AbstractUser.FIELD_ROLE_ID);
+        Integer roleId = (Integer) userResultSet.getObject(AbstractUser.FIELD_ROLE_ID);
         abstractUser.setRoleId(roleId);
         
         RoleDAO roleDAO = DAOFactory.INSTANCE.getRoleDAO();

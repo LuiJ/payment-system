@@ -9,16 +9,16 @@ public class Role implements Identifiable, GrantedAuthority {
     public static final String FIELD_ID = "id";
     public static final String FIELD_ROLE_NAME = "role_name";
     
-    private int id;
+    private Integer id;
     private String roleName;
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

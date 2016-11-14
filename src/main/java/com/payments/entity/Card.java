@@ -11,21 +11,21 @@ public class Card implements Identifiable {
     public static final String FIELD_STATUS = "status";
     public static final String FIELD_ACCOUNT_ID = "account_id";
 
-    private int id;
+    private Integer id;
     private long number;
     private String pinCode;
     private String salt;
     private Status status;
-    private int accountId;
+    private Integer accountId;
     private Account account;
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -61,11 +61,11 @@ public class Card implements Identifiable {
         this.status = status;
     }
 
-    public int getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
