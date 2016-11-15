@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url var="userPaymentUrl" value="/user/payment"></c:url>
 
@@ -14,15 +15,20 @@
     
     <div class="select-wrap">
         <select id="chose-card" name="accountId" onchange="chooseCard(this);">
-            <option value="0">Chose the card</option>
+            <option value="-1">Chose the card</option>
             <c:if test="${not empty cards}">
                 <c:forEach items="${cards}" var="card">
-                    <option class="cand-number" data-available-amount="${card.account.amount}" value="${card.accountId}">${card.number}</option>
+                    <fmt:formatDate pattern="MM / yyyy" value="${card.expirationDate}" var="formattedDate"/>
+                    <option class="cand-number" data-available-amount="${card.account.amount}" data-expiration-date="${formattedDate}" value="${card.accountId}">${card.number}</option>
                 </c:forEach>
             </c:if>
         </select>
     </div>
     <div id="payment-part">
+        <p id="expiration-date">
+            <b>Expiration Date:</b>&nbsp;
+            <span></span>
+        </p>
         <p id="amount-available">
             <b>Amount available:</b>&nbsp;
             <span></span>

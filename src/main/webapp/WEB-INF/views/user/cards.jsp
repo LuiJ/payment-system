@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url var="cardBlockUrl" value="/user/card-block"></c:url>
 
@@ -14,6 +15,7 @@
                     <td>Account No.</td>
                     <td>Amount</td>
                     <td>Status</td>
+                    <td>Expiration Date</td>
                     <td>Action</td>
                 </tr>
             </thead>
@@ -24,6 +26,9 @@
                         <td>${card.account.number}</td>
                         <td>${card.account.amount}</td>
                         <td>${card.status}</td>
+                        <td>
+                            <fmt:formatDate pattern="MM / yyyy" value="${card.expirationDate}"/>
+                        </td>
                         <td>
                             <c:choose>
                                 <c:when test="${card.status == 'ACTIVE'}">

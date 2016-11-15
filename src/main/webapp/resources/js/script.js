@@ -3,9 +3,13 @@ $('input[type="submit"], a').click(function(){
 });
 
 function chooseCard(obj){
+    var expirationDate = $(obj).find("option:selected")
+                               .attr("data-expiration-date");
     var amountAvailable = $(obj).find("option:selected")
                                 .attr("data-available-amount");
-    if (amountAvailable > 0){
+    var accountId = $(obj).find("option:selected").val();
+    if (accountId > -1){
+        $("#expiration-date span").html(expirationDate);
         $("#amount-available span").html(amountAvailable);
         $('#payment-part input[type="text"]').val("");
         $("#payment-part").show();

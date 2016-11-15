@@ -252,11 +252,15 @@
     width: 100%;
     box-sizing: border-box;
 }
-#amount-available {
+#amount-available, 
+#expiration-date {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     font-size: 15px;
     color: #333333;
+}
+#amount-available {
+    margin-bottom: 30px;
 }
 #payment-part {
     display: none;

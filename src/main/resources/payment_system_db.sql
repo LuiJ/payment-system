@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `card` (
     `pin_code` varchar(64) NOT NULL,
     `salt` varchar(20) NOT NULL,
     `status` ENUM('ACTIVE', 'BLOCKED'),
+    `expiration_date` datetime  NOT NULL,
     `account_id` int(10) DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `account_id` (`account_id`)
@@ -115,13 +116,13 @@ INSERT INTO `account` (`id`, `number`, `status`, `amount`, `user_id`) VALUES
 (5, 5555444433332222, 'ACTIVE', 5000, 3);
 
 
-INSERT INTO `card` (`id`, `number`, `pin_code`, `salt`, `status`, `account_id`) VALUES
-(1, 1111222233334444, '2e85f2853403ff47a63f3525034b848c', 'f9e04a82f7e1b7ef5eca', 'ACTIVE', 1),
-(2, 2222333344445555, 'dc1513be2d528fafbb5e4ffe6f255795', '7e4a80b9f6d0baad8991', 'ACTIVE', 2),
-(3, 3333444455556666, '4c93ae6f3b5785e75766718909c9c13d', '7750f3c4ab38895f3649', 'ACTIVE', 3),
-(4, 4444555566667777, '3957a57092de2a6ba493ad3e6a59c35f', '26ecb15588d4a445b12c', 'ACTIVE', 3),
-(5, 5555666677778888, 'a73a5617bd8afcfe22683a8c9988c6e4', 'bac3d0798fa05c3af10f', 'ACTIVE', 4),
-(6, 6666777788889999, '4c3a9503975ca8b04827524959553837', 'd720aa09c95ff7dd7ccf', 'ACTIVE', 5);
+INSERT INTO `card` (`id`, `number`, `pin_code`, `salt`, `status`, `expiration_date`, `account_id`) VALUES
+(1, 1111222233334444, '2e85f2853403ff47a63f3525034b848c', 'f9e04a82f7e1b7ef5eca', 'ACTIVE', '2018-04-07 00:00:00', 1),
+(2, 2222333344445555, 'dc1513be2d528fafbb5e4ffe6f255795', '7e4a80b9f6d0baad8991', 'ACTIVE', '2018-04-07 00:00:00', 2),
+(3, 3333444455556666, '4c93ae6f3b5785e75766718909c9c13d', '7750f3c4ab38895f3649', 'ACTIVE', '2018-04-07 00:00:00', 3),
+(4, 4444555566667777, '3957a57092de2a6ba493ad3e6a59c35f', '26ecb15588d4a445b12c', 'ACTIVE', '2018-04-07 00:00:00', 3),
+(5, 5555666677778888, 'a73a5617bd8afcfe22683a8c9988c6e4', 'bac3d0798fa05c3af10f', 'ACTIVE', '2018-04-07 00:00:00', 4),
+(6, 6666777788889999, '4c3a9503975ca8b04827524959553837', 'd720aa09c95ff7dd7ccf', 'ACTIVE', '2018-04-07 00:00:00', 5);
 
 
 INSERT INTO `operation` (`id`, `date`, `type`, `amount`, `user_id`, `account_id`, `card_id`) VALUES
