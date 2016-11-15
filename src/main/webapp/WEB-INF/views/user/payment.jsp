@@ -13,6 +13,7 @@
         <p class="error-msg">${errorMessage}</p>
     </c:if>
     
+    <p class="label"><b>Card:</b></p>
     <div class="select-wrap">
         <select id="chose-card" name="accountId" onchange="chooseCard(this);">
             <option value="-1">Chose the card</option>
@@ -24,23 +25,36 @@
             </c:if>
         </select>
     </div>
+    
     <div id="payment-part">
-        <p id="expiration-date">
+        <p id="expiration-date" class="label">
             <b>Expiration Date:</b>&nbsp;
             <span></span>
         </p>
-        <p id="amount-available">
+        <p id="amount-available" class="label">
             <b>Amount available:</b>&nbsp;
             <span></span>
         </p>
-        <div class="input-wrap">
-            <input type="text" placeholder="Card or Account Nubmer" name="number" class="number"/>             
+        
+        <p class="label"><b>Operation type:</b></p>
+        <div class="select-wrap" id="payment-type-select">
+            <select name="operationType">
+                <option value="PAYMENT">Payment</option>
+                <option value="TRANSFER">Transfer to own card/account</option>
+            </select>
         </div>
-        <p class="note"><b>Note:</b> Enter Card or Account Nubmer for which you want to pay or transfer money</p>
+        
+        <p class="label"><b>Card or Account Nubmer:</b></p>
+        <div class="input-wrap">
+            <input type="text" placeholder="XXXX XXXX XXXX XXXX" name="number" class="number"/>             
+        </div>
+        <p class="note"><b><u>Note</u>:</b> Enter Card or Account Nubmer for which you want to pay or transfer money</p>
+        
+        <p class="label"><b>Amount:</b></p>
         <div class="input-wrap">
             <input type="text" placeholder="Amount of money" name="amount" class="amount"/>             
         </div>
-        <p class="note"><b>Note:</b> Amount of money you want to pay or transfer.</p>
+        <p class="note"><b><u>Note</u>:</b> Amount of money you want to pay or transfer.</p>
         <input type="submit" name="submit" value="1" class="hidden"/> 
         <div class="btn center" id="payment-form-btn" onclick="sendPaymentForm(this);">Go</div>
     </div>          

@@ -5,6 +5,7 @@ import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.entity.Account;
 import com.payments.entity.Card;
+import com.payments.entity.OperationType;
 import com.payments.entity.Payment;
 import com.payments.entity.Status;
 import com.payments.exception.IncorrectPaymentDataException;
@@ -23,11 +24,12 @@ public class PaymentService {
     }
 
     
-    public Payment makePayment(int payerAccountId, long targetNumber, BigDecimal paymentAmount)
+    public Payment makePayment(int payerAccountId, long targetNumber, 
+                               BigDecimal paymentAmount, OperationType operationType)
                    throws PaymentsException
     {
         Account payerAccount = accountDAO.getById(payerAccountId);        
-        checkPaymentData(payerAccount, targetNumber, paymentAmount);
+        checkPaymentData(payerAccount, targetNumber, paymentAmount, operationType);
         
         Payment payment = new Payment();
         payment.setPayerAccount(payerAccount);        
@@ -41,7 +43,8 @@ public class PaymentService {
     }
     
     
-    private void checkPaymentData(Account payerAccount, long targetNumber, BigDecimal paymentAmount)
+    private void checkPaymentData(Account payerAccount, long targetNumber, 
+                                  BigDecimal paymentAmount, OperationType operationType)
                    throws PaymentsException
     {
         if (payerAccount == null || paymentAmount == BigDecimal.ZERO){
@@ -62,6 +65,20 @@ public class PaymentService {
         int targetAccountId = targetAccount.getId();
         int payerAccountId = payerAccount.getId();
         if (targetAccountId == payerAccountId){
+            throw new IncorrectPaymentDataException(View.USER_PAYMENT_ERROR);
+        }
+        
+        if (operationType != OperationType.PAYMENT && 
+            operationType != OperationType.TRANSFER)
+        {
+            throw new IncorrectPaymentDataException(View.USER_PAYMENT_ERROR);
+        }
+        
+        int targetAccountOwnerId = targetAccount.getUserId();
+        int payerId = payerAccount.getUserId();
+        if ((operationType != OperationType.TRANSFER && payerId == targetAccountOwnerId) ||
+            (operationType == OperationType.TRANSFER && payerId != targetAccountOwnerId))
+        {
             throw new IncorrectPaymentDataException(View.USER_PAYMENT_ERROR);
         }
         

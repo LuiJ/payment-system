@@ -157,7 +157,8 @@ public class DAOHelper <T extends Identifiable> {
                     throw new IllegalStateException(e.getMessage());
                 }               
                     
-                if (!fieldValue.equalsIgnoreCase("null") && 
+                if (fieldValue != null &&
+                    !fieldValue.equalsIgnoreCase("null") && 
                     !fieldValue.equalsIgnoreCase("0"))
                 {
                     fieldValue = "'" + fieldValue + "'";

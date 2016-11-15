@@ -4,6 +4,7 @@ package com.payments.entity;
 public enum OperationType {
     
     PAYMENT("Payment has been done"), 
+    TRANSFER("Transfer has been done"), 
     RECEIVE_MONEY("Money have been received"), 
     CARD_BLOCKING("Card has been blocked"), 
     CARD_ACTIVATING("Card has been activated"), 

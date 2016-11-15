@@ -252,12 +252,11 @@
     width: 100%;
     box-sizing: border-box;
 }
-#amount-available, 
-#expiration-date {
+.label {
     width: 100%;
     margin-bottom: 5px;
     font-size: 15px;
-    color: #333333;
+    color: #777777;
 }
 #amount-available {
     margin-bottom: 30px;

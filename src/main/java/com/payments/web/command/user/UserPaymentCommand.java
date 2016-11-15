@@ -3,6 +3,7 @@ package com.payments.web.command.user;
 import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.entity.Card;
+import com.payments.entity.OperationType;
 import com.payments.entity.Payment;
 import com.payments.entity.User;
 import com.payments.exception.PaymentsException;
@@ -33,6 +34,9 @@ public class UserPaymentCommand extends AbstractCommand {
         String accountIdParameter = request.getParameter(RequestParameter.ACCOUNT_ID.getParameter());
         int payerAccountId = Integer.parseInt(accountIdParameter); 
         
+        String operationTypeParameter = request.getParameter(RequestParameter.OPERATION_TYPE.getParameter());
+        OperationType operationType = OperationType.valueOf(operationTypeParameter);
+        
         String numberParameter = request.getParameter(RequestParameter.NUMBER.getParameter());
         String trimmedNumber = numberParameter.replaceAll("\\s+","");
         long targetNumber = Long.parseLong(trimmedNumber);
@@ -42,10 +46,11 @@ public class UserPaymentCommand extends AbstractCommand {
         BigDecimal paymentAmount = BigDecimal.valueOf(amountDouble);
         
         PaymentService paymentService = new PaymentService();
-        Payment payment = paymentService.makePayment(payerAccountId, targetNumber, paymentAmount);
+        Payment payment = paymentService.makePayment(payerAccountId, targetNumber, 
+                                                     paymentAmount, operationType);
         
         OperationService operationService = new OperationService();
-        operationService.savePaymentOperation(payment);
+        operationService.savePaymentOperation(payment, operationType);
         
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(Attribute.LOGGED_USER);

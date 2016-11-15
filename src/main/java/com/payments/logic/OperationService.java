@@ -70,10 +70,10 @@ public class OperationService {
     } 
    
     
-    public void savePaymentOperation(Payment payment)
+    public void savePaymentOperation(Payment payment, OperationType operationType)
     {
         Operation payerOperation = createOperation();        
-        payerOperation.setType(OperationType.PAYMENT);
+        payerOperation.setType(operationType);
         
         Account payerAccount = payment.getPayerAccount();
         int payerAccountId = payerAccount.getId();

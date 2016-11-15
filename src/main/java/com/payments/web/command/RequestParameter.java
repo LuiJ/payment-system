@@ -6,7 +6,8 @@ public enum RequestParameter {
     CARD_ID("cardId"),
     ACCOUNT_ID("accountId"),
     NUMBER("number"),
-    AMOUNT("amount");
+    AMOUNT("amount"),
+    OPERATION_TYPE("operationType");
     
     private final String parameter; 
     
