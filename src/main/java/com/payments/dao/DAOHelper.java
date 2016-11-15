@@ -149,22 +149,22 @@ public class DAOHelper <T extends Identifiable> {
                         fieldValue = dateFormatter.format(date);
                     }
                     else {
-                        fieldValue = String.valueOf(result);
-                
-                        if (!fieldValue.equalsIgnoreCase("null") && 
-                            !fieldValue.equalsIgnoreCase("0"))
-                        {
-                            fieldValue = "'" + fieldValue + "'";
-                        }
-                        else {
-                            fieldValue = "NULL";
-                        }
-                    }                    
+                        fieldValue = String.valueOf(result);                       
+                    } 
                 }
                 catch (IllegalAccessException | InvocationTargetException | ClassCastException e){
                     logger.error(e.getMessage(), e);
                     throw new IllegalStateException(e.getMessage());
-                } 
+                }               
+                    
+                if (!fieldValue.equalsIgnoreCase("null") && 
+                    !fieldValue.equalsIgnoreCase("0"))
+                {
+                    fieldValue = "'" + fieldValue + "'";
+                }
+                else {
+                    fieldValue = "NULL";
+                }
                 
                 if (resultType == ResultTypeEnum.PARAMS_AND_VALUES){
                     queryParams.add(fieldName + "=" + fieldValue);
