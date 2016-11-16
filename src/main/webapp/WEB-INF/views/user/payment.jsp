@@ -38,17 +38,26 @@
         
         <p class="label"><b>Operation type:</b></p>
         <div class="select-wrap" id="payment-type-select">
-            <select name="operationType">
+            <select name="operationType" onchange="chooseOperationType(this);">
                 <option value="PAYMENT">Payment</option>
                 <option value="TRANSFER">Transfer to own card/account</option>
             </select>
         </div>
         
-        <p class="label"><b>Card or Account Nubmer:</b></p>
-        <div class="input-wrap">
-            <input type="text" placeholder="XXXX XXXX XXXX XXXX" name="number" class="number"/>             
+        <div id="number-input-wrap">
+            <p class="label"><b>Card or Account Nubmer:</b></p>
+            <div class="input-wrap">
+                <input type="text" placeholder="XXXX XXXX XXXX XXXX" name="number" class="number"/>             
+            </div>
+            <p class="note"><b><u>Note</u>:</b> Enter Card or Account Nubmer for which you want to pay or transfer money</p>
         </div>
-        <p class="note"><b><u>Note</u>:</b> Enter Card or Account Nubmer for which you want to pay or transfer money</p>
+        
+        <div id="card-select-wrap">
+            <p class="label"><b>Choose card to transfer:</b></p>
+            <div class="select-wrap">
+                <select id="card-to-transfer"></select>
+            </div>            
+        </div>
         
         <p class="label"><b>Amount:</b></p>
         <div class="input-wrap">

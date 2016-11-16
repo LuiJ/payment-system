@@ -261,6 +261,6 @@
 #amount-available {
     margin-bottom: 30px;
 }
-#payment-part {
+#payment-part, #card-select-wrap {
     display: none;
 }
