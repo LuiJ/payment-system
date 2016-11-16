@@ -8,7 +8,6 @@ import com.payments.entity.Status;
 import com.payments.entity.Card;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -34,9 +33,7 @@ public class CardBuilder implements EntityBuilder {
         Status status = Status.valueOf(cardResultSet.getString(Card.FIELD_STATUS));
         card.setStatus(status);
         
-        Timestamp timestamp = cardResultSet.getTimestamp(Card.FIELD_EXPIRATION_DATE);
-        long time = timestamp.getTime();
-        Date expirationDate = new Date(time);
+        Date expirationDate = cardResultSet.getDate(Card.FIELD_EXPIRATION_DATE);
         card.setExpirationDate(expirationDate);
         
         Integer accountId = (Integer) cardResultSet.getObject(Card.FIELD_ACCOUNT_ID);

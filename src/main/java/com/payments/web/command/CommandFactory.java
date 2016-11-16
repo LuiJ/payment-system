@@ -25,6 +25,8 @@ public class CommandFactory {
     
     private static final String HTTP_GET = "GET";
     private static final String HTTP_POST = "POST";
+    
+    private static final String SEMICOLON_SEPARATOR = ";";
            
     private static final String ADMIN = "admin";    
     private static final String ADMIN_HOME = "/admin";
@@ -189,8 +191,8 @@ public class CommandFactory {
     private static String getRequestCommand(HttpServletRequest request){
         String urlRoot = request.getContextPath();
         String uri = request.getRequestURI();
+        uri = removeParamsFromUri(uri);
         String commandString = uri.split(urlRoot)[1];
-        commandString = removeJSessionId(commandString);
         commandString = removeLastSlash(commandString);
         return commandString;
     }
@@ -207,11 +209,10 @@ public class CommandFactory {
     }
     
     
-    private static String removeJSessionId(String value) {
-        String jsessionParam = ";jsessionid";
+    private static String removeParamsFromUri(String value) {
         String result = value;
-        if (value.contains(jsessionParam)){
-            result = value.split(jsessionParam)[0];
+        if (value.contains(SEMICOLON_SEPARATOR)){
+            result = value.split(SEMICOLON_SEPARATOR)[0];
         }
         return result;
     }
