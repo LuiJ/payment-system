@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>    
+    <Appenders>
+        <Console name="Console">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </Console>
+        <File name="File" fileName="D:/payments_system.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </File>
+    </Appenders>    
+    
+    <Loggers>
+        <Root level="ERROR">
+            <AppenderRef ref="Console" level="ERROR"/>
+        </Root>
+        <logger name="com.payments" level="ALL">
+            <AppenderRef ref="Console" level="ALL"/>
+            <AppenderRef ref="File" level="ALL"/>
+  	</logger>
+    </Loggers>    
+</Configuration>

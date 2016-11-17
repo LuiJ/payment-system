@@ -12,13 +12,14 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 
 public class DAOHelper <T extends Identifiable> {
     
-    private static final Logger logger = Logger.getLogger(DAOHelper.class);
+    private static final Logger logger = LogManager.getLogger(DAOHelper.class);
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     
     private enum ResultTypeEnum {
