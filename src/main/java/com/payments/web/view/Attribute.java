@@ -10,6 +10,8 @@ public final class Attribute {
     public static final String ACCOUNTS = "accounts";
     public static final String CARDS = "cards";
     public static final String OPERATIONS = "operations";
+    public static final String LOCALE = "locale";
+    public static final String BASE_NAME = "baseName";
     
     private Attribute(){}
 }

@@ -1,7 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h3>Accounts List:</h3>
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${baseName}"/>
+
+<h3><fmt:message key="text.accountsList"/>:</h3>
 
 <c:choose>
 
@@ -9,11 +13,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>Account No.</td>
-                    <td>Owner</td>
-                    <td>Status</td>
-                    <td>Amount</td>
-                    <td>Cards</td>
+                    <td><fmt:message key="column.label.accountNumber"/></td>
+                    <td><fmt:message key="column.label.owner"/></td>
+                    <td><fmt:message key="column.label.status"/></td>
+                    <td><fmt:message key="column.label.amount"/></td>
+                    <td><fmt:message key="column.label.cards"/></td>
                 </tr>
             </thead>
             <tbody>                        
@@ -32,7 +36,7 @@
                                     </c:forEach>
                                 </c:when> 
                                 <c:otherwise>
-                                    <p>No cards.</p>
+                                    <p><fmt:message key="text.noCards"/></p>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -43,7 +47,7 @@
     </c:when> 
 
     <c:otherwise>
-        <p>No accounts.</p>
+        <p class="info-msg"><fmt:message key="text.noAccounts"/></p>
     </c:otherwise>
 
 </c:choose>

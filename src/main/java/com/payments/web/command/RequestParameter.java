@@ -7,7 +7,8 @@ public enum RequestParameter {
     ACCOUNT_ID("accountId"),
     NUMBER("number"),
     AMOUNT("amount"),
-    OPERATION_TYPE("operationType");
+    OPERATION_TYPE("operationType"),
+    LOCALE("locale");
     
     private final String parameter; 
     

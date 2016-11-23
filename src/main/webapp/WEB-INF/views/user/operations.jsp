@@ -1,7 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h3>Operations List:</h3>
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${baseName}"/>
+
+<h3><fmt:message key="text.operationsList"/>:</h3>
 
 <c:choose>
 
@@ -9,11 +12,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>Date</td>
-                    <td>Operation</td>
-                    <td>Description</td>
-                    <td>Number</td>
-                    <td>Amount</td>
+                    <td><fmt:message key="column.label.date"/></td>
+                    <td><fmt:message key="column.label.operation"/></td>
+                    <td><fmt:message key="column.label.description"/></td>
+                    <td><fmt:message key="column.label.number"/></td>
+                    <td><fmt:message key="column.label.amount"/></td>
                 </tr>
             </thead>
             <tbody>                        
@@ -40,7 +43,7 @@
     </c:when> 
 
     <c:otherwise>
-        <p class="info-msg">No operations.</p>
+        <p class="info-msg"><fmt:message key="text.noOperations"/></p>
     </c:otherwise>
 
 </c:choose>

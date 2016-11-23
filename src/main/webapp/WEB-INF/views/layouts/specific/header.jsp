@@ -1,4 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${baseName}"/>
 
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
 
@@ -8,7 +12,15 @@
         <form method="POST" action="${logoutUrl}" id="h-logout-form">
             <input class="btn" id="h-logout-btn" type="submit" name="logout" value="Logout" />
         </form>
-        <p id="welcome">Welcome, ${loggedUser.firstName}</p>
+        <form>
+            <div id="lang-select-wrap">
+                <select name="locale" onchange="changeLanguage(this);">
+                    <option value="en" ${locale == "en" ? "selected" : ""}><fmt:message key="input.option.english"/></option>
+                    <option value="ru" ${locale == "ru" ? "selected" : ""}><fmt:message key="input.option.russian"/></option>
+                </select>
+            </div>
+        </form>
+        <p id="welcome"><fmt:message key="text.welcome"/>, ${loggedUser.firstName}</p>
         <div class="clear"></div>
     </c:if>    
 </div>

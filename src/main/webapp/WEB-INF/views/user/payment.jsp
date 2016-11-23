@@ -1,9 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${baseName}"/>
+
 <c:url var="userPaymentUrl" value="/user/payment"></c:url>
 
-<h3>Make payment or money transfer:</h3>   
+<h3><fmt:message key="text.makePaymentOrTransfer"/>:</h3>   
 
 <form action="${userPaymentUrl}" method="POST" id="payment-form">
     <c:if test="${not empty successMessage}">
@@ -13,10 +16,10 @@
         <p class="error-msg">${errorMessage}</p>
     </c:if>
     
-    <p class="label"><b>Card:</b></p>
+    <p class="label"><b><fmt:message key="input.label.card"/>:</b></p>
     <div class="select-wrap">
         <select id="chose-card" name="accountId" onchange="chooseCard(this);">
-            <option value="-1">Chose the card</option>
+            <option value="-1"><fmt:message key="input.label.chooseCard"/></option>
             <c:if test="${not empty cards}">
                 <c:forEach items="${cards}" var="card">
                     <fmt:formatDate pattern="MM / yyyy" value="${card.expirationDate}" var="formattedDate"/>
@@ -28,44 +31,44 @@
     
     <div id="payment-part">
         <p id="expiration-date" class="label">
-            <b>Expiration Date:</b>&nbsp;
+            <b><fmt:message key="text.expirationDate"/>:</b>&nbsp;
             <span></span>
         </p>
         <p id="amount-available" class="label">
-            <b>Amount available:</b>&nbsp;
+            <b><fmt:message key="text.availableAmount"/>:</b>&nbsp;
             <span></span>
         </p>
         
-        <p class="label"><b>Operation type:</b></p>
+        <p class="label"><b><fmt:message key="text.operationType"/>:</b></p>
         <div class="select-wrap" id="payment-type-select">
             <select name="operationType" onchange="chooseOperationType(this);">
-                <option value="PAYMENT">Payment</option>
-                <option value="TRANSFER">Transfer to own card/account</option>
+                <option value="PAYMENT"><fmt:message key="input.option.payment"/></option>
+                <option value="TRANSFER"><fmt:message key="input.option.transfer"/></option>
             </select>
         </div>
         
         <div id="number-input-wrap">
-            <p class="label"><b>Card or Account Nubmer:</b></p>
+            <p class="label"><b><fmt:message key="input.label.number"/>:</b></p>
             <div class="input-wrap">
                 <input type="text" placeholder="XXXX XXXX XXXX XXXX" name="number" class="number"/>             
             </div>
-            <p class="note"><b><u>Note</u>:</b> Enter Card or Account Nubmer for which you want to pay or transfer money</p>
+            <p class="note"><b><u><fmt:message key="text.note"/></u>:</b> <fmt:message key="text.numberNote"/></p>
         </div>
         
         <div id="card-select-wrap">
-            <p class="label"><b>Choose card to transfer:</b></p>
+            <p class="label"><b><fmt:message key="input.label.chooseCardToTransfer"/>:</b></p>
             <div class="select-wrap">
                 <select id="card-to-transfer"></select>
             </div>            
         </div>
         
-        <p class="label"><b>Amount:</b></p>
+        <p class="label"><b><fmt:message key="input.label.amount"/>:</b></p>
         <div class="input-wrap">
             <input type="text" placeholder="Amount of money" name="amount" class="amount"/>             
         </div>
-        <p class="note"><b><u>Note</u>:</b> Amount of money you want to pay or transfer.</p>
+        <p class="note"><b><u><fmt:message key="text.note"/></u>:</b> <fmt:message key="text.amountNote"/></p>
         <input type="submit" name="submit" value="1" class="hidden"/> 
-        <div class="btn center" id="payment-form-btn" onclick="sendPaymentForm(this);">Go</div>
+        <div class="btn center" id="payment-form-btn" onclick="sendPaymentForm(this);"><fmt:message key="button.label.doPayment"/></div>
     </div>          
 </form>
    
