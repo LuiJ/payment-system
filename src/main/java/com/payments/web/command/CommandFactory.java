@@ -51,9 +51,9 @@ public class CommandFactory {
     private static final String ACCESS_DENIED = "/denied";
     
     
-    public static Command create(HttpServletRequest request)
+    public static AbstractServletCommand create(HttpServletRequest request)
     {
-        Command command = null;                  
+        AbstractServletCommand command = null;                  
         String httpMethod = request.getMethod().toUpperCase();
         
         switch (httpMethod){
@@ -65,14 +65,14 @@ public class CommandFactory {
                 break;
             default:
                 throw new IllegalArgumentException(httpMethod+" method is not supported.");
-        }        
+        }   
         return command;
     }    
     
     
-    private static Command processGetRequest(HttpServletRequest request)
+    private static AbstractServletCommand processGetRequest(HttpServletRequest request)
     {
-        Command command = null;
+        AbstractServletCommand command = null;
         String requestCommand = getRequestCommand(request);
         
         switch (requestCommand){
@@ -122,9 +122,9 @@ public class CommandFactory {
     }
     
     
-    private static Command processPostRequest(HttpServletRequest request)
+    private static AbstractServletCommand processPostRequest(HttpServletRequest request)
     {
-        Command command = null;
+        AbstractServletCommand command = null;
         String requestCommand = getRequestCommand(request);
         
         switch (requestCommand){
@@ -150,9 +150,9 @@ public class CommandFactory {
     }
     
     
-    private static Command getLoginPageCommand(HttpServletRequest request)
+    private static AbstractServletCommand getLoginPageCommand(HttpServletRequest request)
     {    
-        Command command = null;
+        AbstractServletCommand command = null;
         String userType = getUserType(request);
         
         switch (userType){
@@ -169,9 +169,9 @@ public class CommandFactory {
     }   
     
     
-    private static Command getLoginFailedCommand(HttpServletRequest request)
+    private static AbstractServletCommand getLoginFailedCommand(HttpServletRequest request)
     {    
-        Command command = null;
+        AbstractServletCommand command = null;
         String userType = getUserType(request);
         
         switch (userType){

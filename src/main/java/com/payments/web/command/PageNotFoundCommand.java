@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class PageNotFoundCommand extends AbstractCommand {
+public class PageNotFoundCommand extends AbstractServletCommand {
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 

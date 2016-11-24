@@ -3,7 +3,7 @@ package com.payments.web.command.admin;
 import com.payments.dao.AccountDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.entity.Account;
-import com.payments.web.command.AbstractCommand;
+import com.payments.web.command.AbstractServletCommand;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.View;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AdminAccountsListCommand extends AbstractCommand {
+public class AdminAccountsListCommand extends AbstractServletCommand {
 
     private static final String PAGE = "accounts";
     

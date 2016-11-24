@@ -4,7 +4,7 @@ import com.payments.dao.CardDAO;
 import com.payments.dao.DAOFactory;
 import com.payments.entity.Card;
 import com.payments.entity.User;
-import com.payments.web.command.AbstractCommand;
+import com.payments.web.command.AbstractServletCommand;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.View;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class UserCardsListCommand extends AbstractCommand {
+public class UserCardsListCommand extends AbstractServletCommand {
     
     private static final String PAGE = "cards";
 

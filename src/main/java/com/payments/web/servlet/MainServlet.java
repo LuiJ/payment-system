@@ -7,7 +7,7 @@ import com.payments.entity.AbstractUser;
 import com.payments.exception.IncorrectPaymentDataException;
 import com.payments.exception.PaymentAmountException;
 import com.payments.exception.PaymentsException;
-import com.payments.web.command.Command;
+import com.payments.web.command.AbstractServletCommand;
 import com.payments.web.command.CommandFactory;
 import com.payments.web.internationalization.InternationalizationHelper;
 import com.payments.web.internationalization.TextPropertiesEnum;
@@ -58,7 +58,8 @@ public class MainServlet extends HttpServlet {
         InternationalizationHelper i18nHelper = new InternationalizationHelper(locale);
         
         try {
-            Command command = CommandFactory.create(request);
+            AbstractServletCommand command = CommandFactory.create(request);
+            command.setInternationalizationHelper(i18nHelper);
             command.execute(request, response); 
         }
         catch (IncorrectPaymentDataException e){   

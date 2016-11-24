@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AccessDeniedCommand extends AbstractCommand {
+public class AccessDeniedCommand extends AbstractServletCommand {
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 

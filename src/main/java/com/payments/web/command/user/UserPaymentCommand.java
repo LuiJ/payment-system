@@ -9,23 +9,21 @@ import com.payments.entity.User;
 import com.payments.exception.PaymentsException;
 import com.payments.logic.OperationService;
 import com.payments.logic.PaymentService;
-import com.payments.web.command.AbstractCommand;
+import com.payments.web.command.AbstractServletCommand;
 import com.payments.web.command.RequestParameter;
-import com.payments.web.internationalization.InternationalizationHelper;
 import com.payments.web.internationalization.TextPropertiesEnum;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.View;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class UserPaymentCommand extends AbstractCommand {
+public class UserPaymentCommand extends AbstractServletCommand {
     
     private static final String PAGE = "payment";
     
@@ -64,9 +62,7 @@ public class UserPaymentCommand extends AbstractCommand {
         request.setAttribute(Attribute.PAGE.getName(), PAGE);        
         request.setAttribute(Attribute.CARDS.getName(), cards);
         
-        Locale locale = (Locale) session.getAttribute(Attribute.LOCALE.getName());
-        InternationalizationHelper i18nHelper = new InternationalizationHelper(locale);
-        String successMessage = i18nHelper.getTextByTextProperty(TextPropertiesEnum.OPERATION_SUCCESS);
+        String successMessage = getLocalizedText(TextPropertiesEnum.OPERATION_SUCCESS);
         request.setAttribute(Attribute.SUCCESS_MESSAGE.getName(), successMessage);
         
         render(request, response, View.USER_PAYMENT);

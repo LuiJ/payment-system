@@ -3,7 +3,7 @@ package com.payments.web.command.admin;
 import com.payments.exception.PaymentsException;
 import com.payments.logic.CardService;
 import com.payments.logic.OperationService;
-import com.payments.web.command.AbstractCommand;
+import com.payments.web.command.AbstractServletCommand;
 import com.payments.web.command.RequestParameter;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class AdminCardActivateCommand extends AbstractCommand {
+public class AdminCardActivateCommand extends AbstractServletCommand {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
@@ -26,7 +26,7 @@ public class AdminCardActivateCommand extends AbstractCommand {
         OperationService operationService = new OperationService();
         operationService.saveCardActivateOperation(cardId);
         
-        AbstractCommand command = new AdminCardsListCommand();
+        AbstractServletCommand command = new AdminCardsListCommand();
         command.execute(request, response);
     }    
 }
