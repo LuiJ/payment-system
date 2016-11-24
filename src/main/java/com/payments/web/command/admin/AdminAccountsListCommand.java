@@ -24,8 +24,8 @@ public class AdminAccountsListCommand extends AbstractCommand {
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
         List<Account> accounts = accountDAO.getAllWithCards(); 
         
-        request.setAttribute(Attribute.PAGE, PAGE);
-        request.setAttribute(Attribute.ACCOUNTS, accounts);        
+        request.setAttribute(Attribute.PAGE.getName(), PAGE);
+        request.setAttribute(Attribute.ACCOUNTS.getName(), accounts);        
         render(request, response, View.ADMIN_ACCOUNTS);
     }
     

@@ -24,14 +24,14 @@ public class UserPaymentPageCommand extends AbstractCommand {
             throws ServletException, IOException
     {    
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(Attribute.LOGGED_USER);
+        User user = (User) session.getAttribute(Attribute.LOGGED_USER.getName());
         int userId = user.getId();
                 
         CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();        
         List<Card> cards = cardDAO.getAllActiveByUserId(userId); 
         
-        request.setAttribute(Attribute.PAGE, PAGE);        
-        request.setAttribute(Attribute.CARDS, cards);
+        request.setAttribute(Attribute.PAGE.getName(), PAGE);        
+        request.setAttribute(Attribute.CARDS.getName(), cards);
         render(request, response, View.USER_PAYMENT);
     }    
 }

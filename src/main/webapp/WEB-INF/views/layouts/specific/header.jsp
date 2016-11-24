@@ -10,11 +10,11 @@
     <a href="#" id="logo">Payment System</a>
     <c:if test="${not empty loggedUser}">        
         <form method="POST" action="${logoutUrl}" id="h-logout-form">
-            <input class="btn" id="h-logout-btn" type="submit" name="logout" value="Logout" />
+            <input class="btn" id="h-logout-btn" type="submit" name="logout" value="<fmt:message key="button.label.logout"/>" />
         </form>
         <form>
             <div id="lang-select-wrap">
-                <select name="locale" onchange="changeLanguage(this);">
+                <select name="locale" onchange="this.form.submit();">
                     <option value="en" ${locale == "en" ? "selected" : ""}><fmt:message key="input.option.english"/></option>
                     <option value="ru" ${locale == "ru" ? "selected" : ""}><fmt:message key="input.option.russian"/></option>
                 </select>

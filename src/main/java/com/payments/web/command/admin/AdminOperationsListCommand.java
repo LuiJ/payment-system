@@ -24,8 +24,8 @@ public class AdminOperationsListCommand extends AbstractCommand {
         OperationDAO operationDAO = DAOFactory.INSTANCE.getOperationDAO();
         List<Operation> operations = operationDAO.getAll();
         
-        request.setAttribute(Attribute.PAGE, PAGE);
-        request.setAttribute(Attribute.OPERATIONS, operations);        
+        request.setAttribute(Attribute.PAGE.getName(), PAGE);
+        request.setAttribute(Attribute.OPERATIONS.getName(), operations);        
         render(request, response, View.ADMIN_OPERATIONS);
     }    
 }

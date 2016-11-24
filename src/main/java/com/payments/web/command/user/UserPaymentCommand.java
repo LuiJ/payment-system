@@ -11,13 +11,14 @@ import com.payments.logic.OperationService;
 import com.payments.logic.PaymentService;
 import com.payments.web.command.AbstractCommand;
 import com.payments.web.command.RequestParameter;
-import com.payments.web.internationalization.InternationalizationService;
+import com.payments.web.internationalization.InternationalizationHelper;
+import com.payments.web.internationalization.TextPropertiesEnum;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.View;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,6 @@ import javax.servlet.http.HttpSession;
 public class UserPaymentCommand extends AbstractCommand {
     
     private static final String PAGE = "payment";
-    private static final String OPERATION_SUCCESS_PROP_NAME = "success.operationSuccess";
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
@@ -55,19 +55,19 @@ public class UserPaymentCommand extends AbstractCommand {
         operationService.savePaymentOperation(payment, operationType);
         
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(Attribute.LOGGED_USER);
+        User user = (User) session.getAttribute(Attribute.LOGGED_USER.getName());
         int userId = user.getId();
                 
         CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();        
         List<Card> cards = cardDAO.getAllActiveByUserId(userId); 
         
-        request.setAttribute(Attribute.PAGE, PAGE);        
-        request.setAttribute(Attribute.CARDS, cards);
+        request.setAttribute(Attribute.PAGE.getName(), PAGE);        
+        request.setAttribute(Attribute.CARDS.getName(), cards);
         
-        InternationalizationService i18nService = new InternationalizationService();
-        ResourceBundle resourceBundle = i18nService.getResourceBundle(session);
-        String successMessage = resourceBundle.getString(OPERATION_SUCCESS_PROP_NAME);
-        request.setAttribute(Attribute.SUCCESS_MESSAGE, successMessage);
+        Locale locale = (Locale) session.getAttribute(Attribute.LOCALE.getName());
+        InternationalizationHelper i18nHelper = new InternationalizationHelper(locale);
+        String successMessage = i18nHelper.getTextByTextProperty(TextPropertiesEnum.OPERATION_SUCCESS);
+        request.setAttribute(Attribute.SUCCESS_MESSAGE.getName(), successMessage);
         
         render(request, response, View.USER_PAYMENT);
     }    

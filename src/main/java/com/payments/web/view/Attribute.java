@@ -1,17 +1,25 @@
 package com.payments.web.view;
 
 
-public final class Attribute {
+public enum Attribute {
         
-    public static final String SUCCESS_MESSAGE = "successMessage";
-    public static final String ERROR_MESSAGE = "errorMessage";
-    public static final String LOGGED_USER = "loggedUser";
-    public static final String PAGE = "page";
-    public static final String ACCOUNTS = "accounts";
-    public static final String CARDS = "cards";
-    public static final String OPERATIONS = "operations";
-    public static final String LOCALE = "locale";
-    public static final String BASE_NAME = "baseName";
+    SUCCESS_MESSAGE("successMessage"),
+    ERROR_MESSAGE("errorMessage"),
+    LOGGED_USER("loggedUser"),
+    PAGE("page"),
+    ACCOUNTS("accounts"),
+    CARDS("cards"),
+    OPERATIONS("operations"),
+    LOCALE("locale"),
+    BASE_NAME("baseName");
     
-    private Attribute(){}
+    private String name;
+    
+    Attribute(String name){
+        this.name = name;
+    }
+    
+    public String getName(){
+        return name;
+    }
 }

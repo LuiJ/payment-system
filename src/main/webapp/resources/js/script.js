@@ -86,7 +86,3 @@ function chooseOperationType(obj){
     }
 }
 
-function changeLanguage(obj){
-    $(obj).closest("form").submit();
-}
-

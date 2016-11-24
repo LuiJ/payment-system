@@ -12,7 +12,7 @@
     <a href="${userAccountsUrl}" class="btn" id="h-login-btn"><fmt:message key="button.label.login"/></a>
     <form>
         <div id="lang-select-wrap">
-            <select name="locale" onchange="changeLanguage(this);">
+            <select name="locale" onchange="this.form.submit();">
                 <option value="en" ${locale == "en" ? "selected" : ""}><fmt:message key="input.option.english"/></option>
                 <option value="ru" ${locale == "ru" ? "selected" : ""}><fmt:message key="input.option.russian"/></option>
             </select>

@@ -26,7 +26,7 @@ public class UserAccountsListCommand extends AbstractCommand {
             throws ServletException, IOException
     {       
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(Attribute.LOGGED_USER);
+        User user = (User) session.getAttribute(Attribute.LOGGED_USER.getName());
         int userId = user.getId();
         
         AccountDAO accountDAO = DAOFactory.INSTANCE.getAccountDAO();
@@ -40,8 +40,8 @@ public class UserAccountsListCommand extends AbstractCommand {
             account.setCards(cards);
         } 
         
-        request.setAttribute(Attribute.PAGE, PAGE);
-        request.setAttribute(Attribute.ACCOUNTS, accounts);        
+        request.setAttribute(Attribute.PAGE.getName(), PAGE);
+        request.setAttribute(Attribute.ACCOUNTS.getName(), accounts);        
         render(request, response, View.USER_ACCOUNTS);
     }
     

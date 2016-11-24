@@ -9,12 +9,13 @@ import com.payments.exception.PaymentAmountException;
 import com.payments.exception.PaymentsException;
 import com.payments.web.command.Command;
 import com.payments.web.command.CommandFactory;
-import com.payments.web.internationalization.InternationalizationService;
+import com.payments.web.internationalization.InternationalizationHelper;
+import com.payments.web.internationalization.TextPropertiesEnum;
 import com.payments.web.view.Attribute;
 import com.payments.web.view.Renderer;
 import com.payments.web.view.View;
 import java.io.IOException;
-import java.util.ResourceBundle;
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +27,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class MainServlet extends HttpServlet {
     
-    private static final String INCORRECT_DATA_ERROR_PROP_NAME = "error.incorrectPaymentData";
-    private static final String INCORRECT_AMOUNT_ERROR_PROP_NAME = "error.notEnoughMoney";
-    
     private final Renderer renderer;    
     
     public MainServlet(){
@@ -36,29 +34,44 @@ public class MainServlet extends HttpServlet {
     }
     
     @Override
-    public void service(HttpServletRequest request, HttpServletResponse response) 
+    public void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException 
     {    
-        HttpSession session = request.getSession(true);   
+        handleRequest(request, response);
+    }
+    
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException 
+    {    
+        handleRequest(request, response);
+    }
+    
+    
+    private void handleRequest(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException 
+    {    
+        HttpSession session = request.getSession();   
         keepUserInSession(session);   
         
-        InternationalizationService i18nService = new InternationalizationService();
-        i18nService.setLocale(request, response);
-        ResourceBundle resourceBundle = i18nService.getResourceBundle(session);
+        Locale locale = (Locale) session.getAttribute(Attribute.LOCALE.getName());
+        InternationalizationHelper i18nHelper = new InternationalizationHelper(locale);
         
         try {
             Command command = CommandFactory.create(request);
             command.execute(request, response); 
         }
         catch (IncorrectPaymentDataException e){   
-            String errorMessage = resourceBundle.getString(INCORRECT_DATA_ERROR_PROP_NAME);
-            request.setAttribute(Attribute.ERROR_MESSAGE, errorMessage);
+            String errorMessage = i18nHelper
+                    .getTextByTextProperty(TextPropertiesEnum.INCORRECT_PAYMENT_DATA_ERROR);
+            request.setAttribute(Attribute.ERROR_MESSAGE.getName(), errorMessage);
             View view = e.getViewToRender();
             renderer.render(request, response, view);            
         } 
         catch (PaymentAmountException e){
-            String errorMessage = resourceBundle.getString(INCORRECT_AMOUNT_ERROR_PROP_NAME);
-            request.setAttribute(Attribute.ERROR_MESSAGE, errorMessage);
+            String errorMessage = i18nHelper
+                    .getTextByTextProperty(TextPropertiesEnum.INCORRECT_AMOUNT_ERROR);
+            request.setAttribute(Attribute.ERROR_MESSAGE.getName(), errorMessage);
             View view = e.getViewToRender();
             renderer.render(request, response, view);            
         } 
@@ -82,6 +95,6 @@ public class MainServlet extends HttpServlet {
             AdminDAO adminDAO = DAOFactory.INSTANCE.getAdminDAO();
             user = adminDAO.getByLogin(userName);
         }        
-        session.setAttribute(Attribute.LOGGED_USER, user);
+        session.setAttribute(Attribute.LOGGED_USER.getName(), user);
     } 
 }

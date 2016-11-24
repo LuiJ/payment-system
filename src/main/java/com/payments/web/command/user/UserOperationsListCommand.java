@@ -24,14 +24,14 @@ public class UserOperationsListCommand extends AbstractCommand {
             throws ServletException, IOException
     {       
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(Attribute.LOGGED_USER);
+        User user = (User) session.getAttribute(Attribute.LOGGED_USER.getName());
         int userId = user.getId();
         
         OperationDAO operationDAO = DAOFactory.INSTANCE.getOperationDAO();
         List<Operation> operations = operationDAO.getAllByUserId(userId);
         
-        request.setAttribute(Attribute.PAGE, PAGE);
-        request.setAttribute(Attribute.OPERATIONS, operations);        
+        request.setAttribute(Attribute.PAGE.getName(), PAGE);
+        request.setAttribute(Attribute.OPERATIONS.getName(), operations);        
         render(request, response, View.USER_OPERATIONS);
     }    
 }

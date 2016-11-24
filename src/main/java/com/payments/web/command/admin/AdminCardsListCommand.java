@@ -24,8 +24,8 @@ public class AdminCardsListCommand extends AbstractCommand {
         CardDAO cardDAO = DAOFactory.INSTANCE.getCardDAO();        
         List<Card> cards = cardDAO.getAll();
         
-        request.setAttribute(Attribute.PAGE, PAGE);
-        request.setAttribute(Attribute.CARDS, cards);        
+        request.setAttribute(Attribute.PAGE.getName(), PAGE);
+        request.setAttribute(Attribute.CARDS.getName(), cards);        
         render(request, response, View.ADMIN_CARDS);
     }    
 }
