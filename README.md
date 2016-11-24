@@ -1,5 +1,5 @@
 # payment-system
-Mentoring project: JDBC, DAO, Servlet API, Spring Security, Apache Tiles, Log4j
+Mentoring project: JDBC, DAO, Servlet API, Spring Security, Apache Tiles, Log4j2, i18n
 
 Задача:
 
